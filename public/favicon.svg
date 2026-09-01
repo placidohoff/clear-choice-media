@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Clear Choice Media</title>
+  <desc id="desc">Blue and charcoal letter C logo</desc>
+  <rect width="64" height="64" rx="18" fill="#071019"/>
+  <circle cx="32" cy="32" r="22" fill="none" stroke="#7cd3ff" stroke-width="6"/>
+  <path d="M43 18c-6.3-5.2-16.9-5.4-23.7-.6-5.9 4.1-8.8 11.3-7.7 18.2 1.3 8.2 7.4 14.9 15.8 17 5.8 1.4 12.3.9 17.5-2.8" fill="none" stroke="#7cd3ff" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="32" cy="32" r="5.5" fill="#7cd3ff"/>
+</svg>
