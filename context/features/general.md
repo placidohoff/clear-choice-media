@@ -6,8 +6,8 @@ Lets create a landing page based on the specs defined within @project-overview.m
 
 # Hosting
 
-##
-Make this website hosted so that it is accessible. Have it hosted on Render.
+## Goals
+Make this website hosted so that it is accessible on the web. Have it hosted on Render.
 
 
 # Images database
@@ -21,3 +21,18 @@ The images should no longer be stock images, but rather they should come from a 
 ##
 The owner should be able to log in and see backend information such as schedules, edit/upload, etc.
 
+
+
+# SEO Optimization
+##
+Do what we can to optimize the  SEO.
+
+
+# Custom Domain
+## 
+Custom domain
+
+
+# Contact Form 
+##
+Functionality for the contact form
