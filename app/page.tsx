@@ -85,8 +85,8 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#071019] text-white">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050d14]/90 backdrop-blur-md">
+    <div className="min-h-screen w-full bg-[#071019] text-white">
+      <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#050d14]/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-3 px-4 py-3 sm:gap-8 sm:px-6 lg:px-10 lg:py-4">
           <div className="flex items-center gap-3">
             <a href="#home" aria-label="Go to top" onClick={() => setIsMenuOpen(false)}>
