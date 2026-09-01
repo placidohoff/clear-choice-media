@@ -224,7 +224,7 @@ export default function Home() {
           </div>
 
           <div className="mb-10 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-            <h2 className="max-w-[800px] text-5xl font-black uppercase leading-[0.9] tracking-[-0.08em] text-white sm:text-6xl lg:text-[7rem]">
+            <h2 className="max-w-[800px] text-5xl font-bold uppercase leading-[0.9] tracking-[-0.06em] text-white sm:text-6xl lg:text-[7rem]">
               More Than Photos.
             </h2>
           </div>
@@ -245,7 +245,7 @@ export default function Home() {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-4xl font-black uppercase tracking-[-0.06em] text-white">{service.title}</h3>
+                  <h3 className="text-4xl font-bold uppercase tracking-[-0.05em] text-white">{service.title}</h3>
                   <p className="mt-3 text-lg leading-8 text-slate-300">{service.description}</p>
                   <button className="mt-6 text-[11px] font-bold uppercase tracking-[0.2em] text-white transition hover:text-[#7cd3ff]">
                     Explore {service.title.includes("Photo") ? "Photo Booths" : service.title.includes("Video") ? "Event Video" : "Photography"} →
@@ -263,7 +263,7 @@ export default function Home() {
               <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-slate-300">Photo Booth Experiences</p>
             </div>
 
-            <h2 className="max-w-[900px] text-5xl font-black uppercase leading-[0.9] tracking-[-0.08em] text-white sm:text-6xl lg:text-[7rem]">
+            <h2 className="max-w-[900px] text-5xl font-bold uppercase leading-[0.9] tracking-[-0.06em] text-white sm:text-6xl lg:text-[7rem]">
               Turn Your Event Into an Experience.
             </h2>
 
@@ -285,7 +285,7 @@ export default function Home() {
                     />
                   </div>
                   <div className="p-5">
-                    <h3 className="text-[2rem] font-black uppercase tracking-[-0.06em] text-white">{card.title}</h3>
+                    <h3 className="text-[2rem] font-bold uppercase tracking-[-0.05em] text-white">{card.title}</h3>
                     <p className="mt-3 text-base leading-7 text-slate-300">{card.description}</p>
                   </div>
                 </article>
@@ -306,7 +306,7 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-              <h2 className="max-w-[700px] text-5xl font-black uppercase leading-[0.9] tracking-[-0.08em] text-white sm:text-6xl lg:text-[7rem]">
+              <h2 className="max-w-[700px] text-5xl font-bold uppercase leading-[0.9] tracking-[-0.06em] text-white sm:text-6xl lg:text-[7rem]">
                 Events We Cover.
               </h2>
               <p className="max-w-[420px] text-xl leading-8 text-slate-300">
@@ -326,7 +326,7 @@ export default function Home() {
                     {event.icon}
                   </div>
                   <div>
-                    <h3 className="text-[2rem] font-black uppercase tracking-[-0.06em] text-white">{event.name}</h3>
+                    <h3 className="text-[2rem] font-bold uppercase tracking-[-0.05em] text-white">{event.name}</h3>
                     <p className="mt-1 text-base text-slate-300">{event.subtitle}</p>
                   </div>
                 </div>
@@ -347,7 +347,7 @@ export default function Home() {
               </button>
             </div>
 
-            <h2 className="text-5xl font-black uppercase leading-[0.9] tracking-[-0.08em] text-white sm:text-6xl lg:text-[7rem]">
+            <h2 className="text-5xl font-bold uppercase leading-[0.9] tracking-[-0.06em] text-white sm:text-6xl lg:text-[7rem]">
               The Portfolio.
             </h2>
 
@@ -395,7 +395,7 @@ export default function Home() {
 
               <div className="flex flex-col justify-center rounded-[2rem] border border-white/10 bg-[#0d1a22] p-8">
                 <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-[#7cd3ff]">Event Video</p>
-                <h2 className="mt-4 text-5xl font-black uppercase leading-[0.9] tracking-[-0.08em] text-white">
+                <h2 className="mt-4 text-5xl font-bold uppercase leading-[0.9] tracking-[-0.06em] text-white">
                   Capture the moment. Extend the story.
                 </h2>
                 <p className="mt-5 text-lg leading-8 text-slate-300">
@@ -422,7 +422,7 @@ export default function Home() {
 
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-[#7cd3ff]">Corporate</p>
-                <h2 className="mt-4 text-5xl font-black uppercase leading-[0.9] tracking-[-0.08em] text-white sm:text-6xl">
+                <h2 className="mt-4 text-5xl font-bold uppercase leading-[0.9] tracking-[-0.06em] text-white sm:text-6xl">
                   Your event. Your brand. Our content.
                 </h2>
                 <p className="mt-5 text-lg leading-8 text-slate-300">
@@ -441,7 +441,7 @@ export default function Home() {
             <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-[#7cd3ff]">Weddings</p>
-                <h2 className="mt-4 text-5xl font-black uppercase leading-[0.9] tracking-[-0.08em] text-white sm:text-6xl">
+                <h2 className="mt-4 text-5xl font-bold uppercase leading-[0.9] tracking-[-0.06em] text-white sm:text-6xl">
                   Your day. Your story. Your way.
                 </h2>
                 <p className="mt-5 text-lg leading-8 text-slate-300">
@@ -472,7 +472,7 @@ export default function Home() {
 
             <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
               <div>
-                <h2 className="text-5xl font-black uppercase leading-[0.9] tracking-[-0.08em] text-white sm:text-6xl">
+                <h2 className="text-5xl font-bold uppercase leading-[0.9] tracking-[-0.06em] text-white sm:text-6xl">
                   Ready to make your event unforgettable?
                 </h2>
                 <p className="mt-5 max-w-md text-lg leading-8 text-slate-300">
