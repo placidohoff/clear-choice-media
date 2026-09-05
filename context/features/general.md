@@ -1,38 +1,40 @@
 # Update Layout
 
 ## Goal
-Lets create a landing page based on the specs defined within @project-overview.md. We can use stock images since I have not given you the actual footage from Clear Choice Media. The color scheme should work well with the logo within @context/screenshots.
-
+Create the design and homepage structure based on the project brief in @project-overview.md using stock placeholders until actual photography is available.
 
 # Hosting
 
 ## Goals
-Make this website hosted so that it is accessible on the web. Have it hosted on Render.
-
+Prepare the app for web hosting and deployment on Render, with environment variables managed outside the repo.
 
 # Images database
 
 ##
-The images should no longer be stock images, but rather they should come from a database. The images may have to live on Cloudinary.
+Use Cloudinary as the media source for production assets, with a future metadata model to store image URLs, alt text, and categories.
 
-
-# Login and Backend Functionality
+# Login and Edit Functionality
 
 ##
-The owner should be able to log in and see backend information such as schedules, edit/upload, etc.
-
-
+The owner can log into a protected admin area, view dashboard information, and update public site-content JSON that powers the homepage without touching code.
 
 # SEO Optimization
 ##
-Do what we can to optimize the  SEO.
-
+Continue optimizing titles, metadata, semantic structure, and content hierarchy for local search performance.
 
 # Custom Domain
-## 
-Custom domain
-
-
-# Contact Form 
 ##
-Functionality for the contact form
+Plan for a custom domain and production DNS setup after hosting is live.
+
+# Contact Form
+##
+Keep the contact form ready for real form submission handling and integration with email or CRM workflows.
+
+# Design Documentation
+##
+Please create a design document for this application to help me fully understand and explain this project and understand design documents in general.
+
+## Current implementation notes
+- The landing page foundation is complete and themed around a premium dark editorial style.
+- The new admin feature branch adds the owner login and content editing flow.
+- Future improvements include Prisma, Cloudinary uploads, and stronger production auth setup.
