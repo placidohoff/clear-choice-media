@@ -1,160 +1,19 @@
-"use client";
-
 import Image from "next/image";
-import { useState } from "react";
+import Link from "next/link";
+
 import logoImage from "../context/screenshots/clear-choice-logo.jpg";
+import { readSiteContent } from "@/lib/site-content";
 
-const navItems = [
-  { label: "Photography", href: "#services" },
-  { label: "Photo Booths", href: "#booths" },
-  { label: "Video", href: "#video" },
-  { label: "Corporate", href: "#corporate" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
-];
-
-const serviceCards = [
-  {
-    title: "Event Photography",
-    description: "Candid moments, portraits, details, and energy.",
-    image:
-      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80",
-    theme: "dark",
-  },
-  {
-    title: "Photo Booth Experiences",
-    description: "Digital booths, print experiences, 360 video, and custom activations.",
-    image:
-      "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=900&q=80",
-    theme: "dark",
-  },
-  {
-    title: "Event Video",
-    description: "Highlight films, social reels, event recaps, and professional coverage.",
-    image:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=80",
-    theme: "dark",
-  },
-];
-
-const boothCards = [
-  {
-    title: "Digital Booth",
-    description: "Digital photos, GIFs, boomerangs, and instant sharing.",
-    image:
-      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    title: "Print Booth",
-    description: "Physical prints guests can take home.",
-    image:
-      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    title: "360 Booth",
-    description: "Slow-motion 360° videos designed for social media.",
-    image:
-      "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    title: "Brand Activations",
-    description: "Custom experiences for companies, expos, and launches.",
-    image:
-      "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=80",
-  },
-];
-
-const eventTypes = [
-  { name: "Weddings", subtitle: "First looks to last dances", icon: "♡" },
-  { name: "Corporate", subtitle: "Conferences & galas", icon: "▣" },
-  { name: "Parties", subtitle: "Birthdays & milestones", icon: "✦" },
-  { name: "Expos & Trade Shows", subtitle: "Booths & brand booths", icon: "◫" },
-  { name: "Celebrations", subtitle: "Showers & reunions", icon: "◍" },
-  { name: "Live Events", subtitle: "Concerts & performances", icon: "♫" },
-];
-
-const portfolioImages = [
-  "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1400&q=80",
-  "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1000&q=80",
-  "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1000&q=80",
-  "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1000&q=80",
-];
-
-export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+export default async function Home() {
+  const content = await readSiteContent();
+  const navItems = content.nav;
+  const serviceCards = content.services;
+  const boothCards = content.boothCards;
+  const eventTypes = content.eventTypes;
+  const portfolioImages = content.portfolioImages;
 
   return (
     <div className="min-h-screen w-full bg-[#071019] text-white" style={{overflowX: 'hidden'}}>
-      <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#050d14]/90 backdrop-blur-md">
-        <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-3 px-4 py-3 sm:gap-8 sm:px-6 lg:px-10 lg:py-4">
-          <div className="flex items-center gap-3">
-            <a href="#home" aria-label="Go to top" onClick={() => setIsMenuOpen(false)}>
-              <Image
-                src={logoImage}
-                alt="Clear Choice Media logo"
-                width={160}
-                height={56}
-                priority
-                className="h-auto w-[110px] object-contain sm:w-[130px] md:w-[160px]"
-              />
-            </a>
-          </div>
-
-          <nav className="hidden items-center gap-8 text-[11px] font-medium uppercase tracking-[0.2em] text-slate-200 lg:flex">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="transition duration-200 hover:text-[#7cd3ff] hover:scale-[1.02]"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-4">
-            <a
-              href="tel:+15551234567"
-              className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.18em] text-slate-100 transition hover:border-[#7cd3ff]/60 hover:bg-[#7cd3ff]/10 sm:flex"
-            >
-              <span>☎</span>
-              Call
-            </a>
-            <a
-              href="#contact"
-              className="hidden rounded-full bg-[#e9eef2] px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.18em] text-[#091923] transition duration-200 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_12px_28px_rgba(124,211,255,0.25)] sm:inline-flex sm:px-6 sm:py-3 sm:text-[11px]"
-            >
-              Check Availability
-            </a>
-            <button
-              type="button"
-              aria-label="Toggle menu"
-              aria-expanded={isMenuOpen}
-              onClick={() => setIsMenuOpen((open) => !open)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-lg text-white lg:hidden"
-            >
-              {isMenuOpen ? "×" : "☰"}
-            </button>
-          </div>
-        </div>
-
-        <div className={`${isMenuOpen ? "block" : "hidden"} border-t border-white/10 bg-[#050d14] px-4 py-3 lg:hidden`}>
-          <nav className="flex flex-col gap-2 text-[10px] font-medium uppercase tracking-[0.18em] text-slate-200">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={() => setIsMenuOpen(false)}
-                className="rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 transition hover:border-[#7cd3ff]/60 hover:text-[#7cd3ff]"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-        </div>
-      </header>
-
       <main className="bg-[#071019]">
         <section id="home" className="relative overflow-hidden bg-[#071019]">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(89,197,240,0.2),_transparent_35%),linear-gradient(rgba(7,16,25,0.55),rgba(7,16,25,0.9))]" />
@@ -165,28 +24,28 @@ export default function Home() {
               <div className="mb-4 flex items-center gap-3 sm:mb-6 sm:gap-4">
                 <div className="h-px w-8 bg-[#7cd3ff] sm:w-12" />
                 <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#7cd3ff] sm:text-[11px] sm:tracking-[0.35em]">
-                  Rhode Island • Southern New England
+                  {content.hero.eyebrow}
                 </p>
               </div>
 
               <h1 className="max-w-[700px] text-[2.75rem] font-black uppercase leading-[0.88] tracking-[-0.08em] text-white sm:text-6xl lg:text-[7rem]">
-                We Capture the Energy.
+                {content.hero.title}
               </h1>
 
               <p className="mt-4 max-w-lg text-lg text-slate-200 sm:mt-6 sm:text-2xl">
-                Photography. Video. Photo Booth Experiences.
+                {content.hero.subtitle}
               </p>
 
               <p className="mt-4 max-w-xl text-sm leading-7 text-slate-300 sm:mt-6 sm:text-lg sm:leading-8">
-                Professional event photography, video production, and interactive photo booth experiences for weddings, corporate events, parties, expos, and celebrations throughout Rhode Island and Southern New England.
+                {content.hero.description}
               </p>
 
               <div className="mt-6 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap">
                 <button className="rounded-full bg-[#7cd3ff] px-5 py-3 text-[10px] font-bold uppercase tracking-[0.18em] text-[#091923] transition duration-200 hover:-translate-y-0.5 hover:bg-[#8ad8ff] hover:shadow-[0_14px_32px_rgba(124,211,255,0.25)] sm:px-7 sm:py-4 sm:text-[11px] sm:tracking-[0.2em]">
-                  Check Availability
+                  {content.hero.primaryCta}
                 </button>
                 <button className="rounded-full border border-white/20 bg-white/5 px-5 py-3 text-[10px] font-bold uppercase tracking-[0.18em] text-white transition duration-200 hover:-translate-y-0.5 hover:border-[#7cd3ff]/60 hover:bg-[#7cd3ff]/10 sm:px-7 sm:py-4 sm:text-[11px] sm:tracking-[0.2em]">
-                  View Our Work
+                  {content.hero.secondaryCta}
                 </button>
               </div>
             </div>
@@ -195,7 +54,7 @@ export default function Home() {
               <div className="absolute inset-8 rounded-[2rem] bg-[#7cd3ff]/10 blur-3xl" />
               <div className="relative w-full overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b1821] shadow-[0_30px_60px_rgba(0,0,0,0.35)]">
                 <img
-                  src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=80"
+                  src={content.hero.featuredEventImage}
                   alt="Event crowd celebrating"
                   className="h-[560px] w-full object-cover"
                 />
@@ -204,8 +63,8 @@ export default function Home() {
                   <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#7cd3ff]">Featured Event</p>
                   <div className="mt-3 flex items-end justify-between gap-4">
                     <div>
-                      <h2 className="text-2xl font-black uppercase tracking-[-0.06em] text-white">RI Summer Social</h2>
-                      <p className="mt-2 text-sm text-slate-300">Photography • Video • Booth Experience</p>
+                      <h2 className="text-2xl font-black uppercase tracking-[-0.06em] text-white">{content.hero.featuredEventName}</h2>
+                      <p className="mt-2 text-sm text-slate-300">{content.hero.featuredEventMeta}</p>
                     </div>
                     <span className="rounded-full bg-[#7cd3ff] px-3 py-1 text-[9px] font-bold uppercase tracking-[0.2em] text-[#091923]">
                       Booked
@@ -248,7 +107,7 @@ export default function Home() {
                   <h3 className="text-4xl font-bold uppercase tracking-[-0.05em] text-white">{service.title}</h3>
                   <p className="mt-3 text-lg leading-8 text-slate-300">{service.description}</p>
                   <button className="mt-6 text-[11px] font-bold uppercase tracking-[0.2em] text-white transition hover:text-[#7cd3ff]">
-                    Explore {service.title.includes("Photo") ? "Photo Booths" : service.title.includes("Video") ? "Event Video" : "Photography"} →
+                    {service.cta} →
                   </button>
                 </div>
               </article>
@@ -479,9 +338,10 @@ export default function Home() {
                   Tell us about your event and we’ll help you plan the right mix of photography, video, and experiences.
                 </p>
                 <div className="mt-8 space-y-4 text-base text-slate-300">
-                  <p>Providence, Rhode Island</p>
-                  <p>Serving Rhode Island & Southern New England</p>
-                  <p>hello@clearchoicemedia.com</p>
+                  <p>{content.contact.city}</p>
+                  <p>{content.contact.serviceArea}</p>
+                  <p>{content.contact.email}</p>
+                  <p>{content.contact.phone}</p>
                 </div>
               </div>
 

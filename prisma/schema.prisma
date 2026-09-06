@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  role      Role     @default(OWNER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+enum Role {
+  OWNER
+  ADMIN
+}
+
+model SiteContent {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("site_content")
+}
+
+model MediaAsset {
+  id          String   @id @default(cuid())
+  publicId    String   @unique
+  url         String
+  altText     String?
+  category    String?
+  isFeatured  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("media_assets")
+}
