@@ -62,12 +62,20 @@ export default async function AdminDashboardPage() {
               <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-[#7cd3ff]">Management</p>
               <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.05em]">Edit public content</h2>
             </div>
-            <Link
-              href="/admin/edit"
-              className="rounded-full bg-[#7cd3ff] px-5 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#091923]"
-            >
-              Open editor
-            </Link>
+            <div className="flex gap-2">
+              <Link
+                href="/admin/edit"
+                className="rounded-full bg-[#7cd3ff] px-5 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#091923]"
+              >
+                Open editor
+              </Link>
+              <Link
+                href="/admin/images"
+                className="rounded-full border border-white/15 px-5 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-200"
+              >
+                Image Manager
+              </Link>
+            </div>
           </div>
 
           <ul className="grid gap-3 text-sm text-slate-300 md:grid-cols-2">

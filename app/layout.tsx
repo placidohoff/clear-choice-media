@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+import { readSiteContent } from "@/lib/site-content";
+import NavHeader from "@/app/components/NavHeader";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -21,13 +24,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const content = await readSiteContent();
+  const navItems = content.nav;
+
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <NavHeader navItems={navItems} primaryCta={content.hero?.primaryCta} />
+
+        <div role="main" className="pt-24">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
