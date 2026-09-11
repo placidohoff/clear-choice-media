@@ -47,3 +47,4 @@ In Progress
 - 2026-09-01: Created feature branch feature/update-layout and built the landing-page foundation.
 - 2026-09-01: Documented the homepage strategy and React/Next app structure for the team.
 - 2026-09-04: Created feature branch `feature/images-database` and added images-database notes.
+- 2026-09-11: Created and merged branch `fix/neon-http-adapter` — admin login was throwing `PrismaClientKnownRequestError` because the network blocks outbound Postgres TCP (5432) to Neon. Switched `lib/prisma.ts` from `@prisma/adapter-pg` to `@prisma/adapter-neon`'s `PrismaNeonHttp`, which queries over HTTPS (443) instead, and reconciled it with the existing lazy-init Proxy pattern from master. Branch deleted after merge.
