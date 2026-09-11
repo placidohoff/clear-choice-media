@@ -40,6 +40,16 @@ In Progress
 
 - New feature branch: `feature/images-database` — created to track work and experiments for the images database and upload UI.
 
+## Hero Carousel Feature
+
+- Goal: Turn the homepage hero's single featured-event image into an auto-advancing carousel (per @context/features/carousel.md). Both the dimmed background panel and the foreground featured-event card must show the same image at the same time, crossfading together as the carousel advances.
+- Decisions:
+	- Each slide carries its own image, event name, and event meta caption (not just the image) — the caption changes in sync with the image.
+	- Slides live in a new `hero.slides` array in `data/site-content.json` (admin-editable later), replacing the old single `featuredEventImage`/`featuredEventName`/`featuredEventMeta` fields.
+	- Autoplay only (~6s interval), no manual dot/arrow controls.
+	- Images should be real Clear Choice Media photos hosted on Cloudinary once available; seeded for now with the single existing placeholder image until real URLs are supplied.
+- Branch: `feature/hero-carousel`.
+
 ## History
 
 - 2026-09-02: Created feature branch feature/login-and-edit and added the initial owner-auth + content-edit flow.
@@ -48,3 +58,4 @@ In Progress
 - 2026-09-01: Documented the homepage strategy and React/Next app structure for the team.
 - 2026-09-04: Created feature branch `feature/images-database` and added images-database notes.
 - 2026-09-11: Created and merged branch `fix/neon-http-adapter` — admin login was throwing `PrismaClientKnownRequestError` because the network blocks outbound Postgres TCP (5432) to Neon. Switched `lib/prisma.ts` from `@prisma/adapter-pg` to `@prisma/adapter-neon`'s `PrismaNeonHttp`, which queries over HTTPS (443) instead, and reconciled it with the existing lazy-init Proxy pattern from master. Branch deleted after merge.
+- 2026-09-11: Created branch `feature/hero-carousel` and implemented the hero image carousel. Replaced `hero.featuredEventImage`/`featuredEventName`/`featuredEventMeta` with a `hero.slides` array in `data/site-content.json` and the `siteContentSchema`. New `app/components/HeroCarousel.tsx` client component autoplays through the slides (~6s interval) with a synchronized crossfade between the dimmed background panel and the foreground featured-event card. Seeded with 3 real Cloudinary event photos plus the original placeholder; the "Featured Event" caption overlay was removed for now since the placeholder captions didn't match the real photos.

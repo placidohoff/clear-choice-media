@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import logoImage from "../context/screenshots/clear-choice-logo.jpg";
+import HeroCarousel from "@/app/components/HeroCarousel";
 import { readSiteContent } from "@/lib/site-content";
 
 export default async function Home() {
@@ -15,66 +16,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen w-full bg-[#071019] text-white" style={{overflowX: 'hidden'}}>
       <main className="bg-[#071019]">
-        <section id="home" className="relative overflow-hidden bg-[#071019]">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(89,197,240,0.2),_transparent_35%),linear-gradient(rgba(7,16,25,0.55),rgba(7,16,25,0.9))]" />
-          <div className="absolute right-0 top-0 h-full w-[45%] bg-[url('https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=80')] bg-cover bg-center opacity-40" />
-
-          <div className="relative mx-auto grid max-w-[1400px] gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10 lg:px-10 lg:py-28">
-            <div className="flex flex-col justify-center">
-              <div className="mb-4 flex items-center gap-3 sm:mb-6 sm:gap-4">
-                <div className="h-px w-8 bg-[#7cd3ff] sm:w-12" />
-                <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#7cd3ff] sm:text-[11px] sm:tracking-[0.35em]">
-                  {content.hero.eyebrow}
-                </p>
-              </div>
-
-              <h1 className="max-w-[700px] text-[2.75rem] font-black uppercase leading-[0.88] tracking-[-0.08em] text-white sm:text-6xl lg:text-[7rem]">
-                {content.hero.title}
-              </h1>
-
-              <p className="mt-4 max-w-lg text-lg text-slate-200 sm:mt-6 sm:text-2xl">
-                {content.hero.subtitle}
-              </p>
-
-              <p className="mt-4 max-w-xl text-sm leading-7 text-slate-300 sm:mt-6 sm:text-lg sm:leading-8">
-                {content.hero.description}
-              </p>
-
-              <div className="mt-6 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap">
-                <button className="rounded-full bg-[#7cd3ff] px-5 py-3 text-[10px] font-bold uppercase tracking-[0.18em] text-[#091923] transition duration-200 hover:-translate-y-0.5 hover:bg-[#8ad8ff] hover:shadow-[0_14px_32px_rgba(124,211,255,0.25)] sm:px-7 sm:py-4 sm:text-[11px] sm:tracking-[0.2em]">
-                  {content.hero.primaryCta}
-                </button>
-                <button className="rounded-full border border-white/20 bg-white/5 px-5 py-3 text-[10px] font-bold uppercase tracking-[0.18em] text-white transition duration-200 hover:-translate-y-0.5 hover:border-[#7cd3ff]/60 hover:bg-[#7cd3ff]/10 sm:px-7 sm:py-4 sm:text-[11px] sm:tracking-[0.2em]">
-                  {content.hero.secondaryCta}
-                </button>
-              </div>
-            </div>
-
-            <div className="relative flex items-center justify-center">
-              <div className="absolute inset-8 rounded-[2rem] bg-[#7cd3ff]/10 blur-3xl" />
-              <div className="relative w-full overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b1821] shadow-[0_30px_60px_rgba(0,0,0,0.35)]">
-                <img
-                  src={content.hero.featuredEventImage}
-                  alt="Event crowd celebrating"
-                  className="h-[560px] w-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#071019] via-[#071019]/15 to-transparent" />
-                <div className="absolute inset-x-6 bottom-6 rounded-[1.35rem] border border-white/10 bg-[#0d1a22]/80 p-5 backdrop-blur-sm">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#7cd3ff]">Featured Event</p>
-                  <div className="mt-3 flex items-end justify-between gap-4">
-                    <div>
-                      <h2 className="text-2xl font-black uppercase tracking-[-0.06em] text-white">{content.hero.featuredEventName}</h2>
-                      <p className="mt-2 text-sm text-slate-300">{content.hero.featuredEventMeta}</p>
-                    </div>
-                    <span className="rounded-full bg-[#7cd3ff] px-3 py-1 text-[9px] font-bold uppercase tracking-[0.2em] text-[#091923]">
-                      Booked
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <HeroCarousel hero={content.hero} />
 
         <section id="services" className="mx-auto max-w-[1400px] px-6 py-12 lg:px-10 lg:py-20">
           <div className="mb-10 flex items-center gap-4">

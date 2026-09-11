@@ -10,9 +10,15 @@ export const siteContentSchema = z.object({
     description: z.string(),
     primaryCta: z.string(),
     secondaryCta: z.string(),
-    featuredEventName: z.string(),
-    featuredEventMeta: z.string(),
-    featuredEventImage: z.string(),
+    slides: z
+      .array(
+        z.object({
+          image: z.string(),
+          eventName: z.string(),
+          eventMeta: z.string(),
+        }),
+      )
+      .min(1),
   }),
   nav: z.array(z.object({ label: z.string(), href: z.string() })),
   services: z.array(
@@ -57,10 +63,29 @@ export const defaultSiteContent: SiteContent = {
       "Professional event photography, video production, and interactive photo booth experiences for weddings, corporate events, parties, expos, and celebrations throughout Rhode Island and Southern New England.",
     primaryCta: "Check Availability",
     secondaryCta: "View Our Work",
-    featuredEventName: "RI Summer Social",
-    featuredEventMeta: "Photography • Video • Booth Experience",
-    featuredEventImage:
-      "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=80",
+    slides: [
+      {
+        image:
+          "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=80",
+        eventName: "RI Summer Social",
+        eventMeta: "Photography • Video • Booth Experience",
+      },
+      {
+        image: "https://res.cloudinary.com/rpwj7zbv/image/upload/v1789154860/pic-6.png",
+        eventName: "Photography",
+        eventMeta: "Photography • Video • Booth Experience",
+      },
+      {
+        image: "https://res.cloudinary.com/rpwj7zbv/image/upload/v1789154847/pic-37.png",
+        eventName: "RI Summer Photography",
+        eventMeta: "Photography • Video • Booth Experience",
+      },
+      {
+        image: "https://res.cloudinary.com/rpwj7zbv/image/upload/v1789154845/pic-34.png",
+        eventName: "Photography",
+        eventMeta: "Photography • Video • Booth Experience",
+      },
+    ],
   },
   nav: [
     { label: "Photography", href: "#services" },
