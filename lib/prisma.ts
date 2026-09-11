@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
-import { Pool } from "pg";
+import { PrismaNeonHttp } from "@prisma/adapter-neon";
 
 const connectionString = process.env.DATABASE_URL;
 
@@ -8,8 +7,9 @@ if (!connectionString) {
   throw new Error("DATABASE_URL is not set. Add it to your environment or prisma7.config.ts config.");
 }
 
-const pool = new Pool({ connectionString });
-const adapter = new PrismaPg(pool);
+// Uses Neon's HTTP driver (plain HTTPS on port 443) instead of raw Postgres
+// TCP on port 5432, which some networks/firewalls block.
+const adapter = new PrismaNeonHttp(connectionString, {});
 
 const globalForPrisma = globalThis as unknown as {
   prisma?: PrismaClient;
