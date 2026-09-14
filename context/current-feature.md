@@ -57,6 +57,13 @@ In Progress
 - Fix: Swapped the raw anchor tags for `next/link`'s `Link` with hrefs prefixed with `/` (e.g. `/#services`). Next.js's `Link` natively scrolls to the hash target after navigating to a different route, and still does an in-page scroll when already on `/`, so one code path covers both cases.
 - Branch: `fix/navigation-scroll`.
 
+## Portfolio Gallery Update
+
+- Goal: Replace the 4 Unsplash stock photos in the homepage portfolio section with real Clear Choice Media photos from Cloudinary, per @context/features/miscellaneous-photo-updates.md. CTA link wiring (buttons with no href) is explicitly out of scope — the user will handle that separately.
+- Decisions: Expand from 4 to 10 images (pic-2, 5, 9, 13, 17, 21, 24, 28, 33, 39 from the `rpwj7zbv` Cloudinary account's pic-1..pic-40 range), laid out in a varied bento-style CSS grid (some tiles spanning extra columns/rows) rather than true Pinterest-style masonry, for visual variety without extra libraries. Tiles zoom slightly on hover (`group-hover:scale-105`), matching the existing service/booth card pattern.
+- Added a click-to-open lightbox: a new `PortfolioLightbox` client component wraps the grid; clicking any tile opens a full-screen overlay with prev/next arrows, a close button, click-outside-to-close, and Escape/arrow-key support. No autoplay — manual navigation only.
+- Branch: `feature/portfolio-gallery`.
+
 ## History
 
 - 2026-09-02: Created feature branch feature/login-and-edit and added the initial owner-auth + content-edit flow.

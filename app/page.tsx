@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import logoImage from "../context/screenshots/clear-choice-logo.jpg";
 import HeroCarousel from "@/app/components/HeroCarousel";
+import PortfolioLightbox from "@/app/components/PortfolioLightbox";
 import { readSiteContent } from "@/lib/site-content";
 
 export default async function Home() {
@@ -152,23 +153,7 @@ export default async function Home() {
               The Portfolio.
             </h2>
 
-            <div className="mt-10 grid gap-6 xl:grid-cols-[1.4fr_0.9fr_0.9fr]">
-              <div className="overflow-hidden rounded-[1.8rem] bg-[#0d1a22] ring-1 ring-white/10 xl:row-span-2">
-                <img src={portfolioImages[0]} alt="Live music performance" className="h-full min-h-[520px] w-full object-cover" />
-              </div>
-
-              <div className="overflow-hidden rounded-[1.8rem] bg-[#0d1a22] ring-1 ring-white/10">
-                <img src={portfolioImages[1]} alt="Wedding portrait" className="h-[250px] w-full object-cover" />
-              </div>
-
-              <div className="overflow-hidden rounded-[1.8rem] bg-[#0d1a22] ring-1 ring-white/10">
-                <img src={portfolioImages[2]} alt="Concert crowd" className="h-[250px] w-full object-cover" />
-              </div>
-
-              <div className="overflow-hidden rounded-[1.8rem] bg-[#0d1a22] ring-1 ring-white/10 xl:col-span-2">
-                <img src={portfolioImages[3]} alt="Corporate event crowd" className="h-[260px] w-full object-cover" />
-              </div>
-            </div>
+            <PortfolioLightbox images={portfolioImages} />
           </div>
         </section>
 
