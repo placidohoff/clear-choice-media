@@ -47,8 +47,9 @@ In Progress
 	- Each slide carries its own image, event name, and event meta caption (not just the image) — the caption changes in sync with the image.
 	- Slides live in a new `hero.slides` array in `data/site-content.json` (admin-editable later), replacing the old single `featuredEventImage`/`featuredEventName`/`featuredEventMeta` fields.
 	- Autoplay only (~6s interval), no manual dot/arrow controls.
-	- Images should be real Clear Choice Media photos hosted on Cloudinary once available; seeded for now with the single existing placeholder image until real URLs are supplied.
-- Branch: `feature/hero-carousel`.
+	- Images should be real Clear Choice Media photos hosted on Cloudinary once available.
+- Branch: `feature/hero-carousel` (merged and deleted — see History).
+- Status: Done. Slides now include 3 real Cloudinary event photos plus the original placeholder; the "Featured Event" caption overlay is currently removed (placeholder captions didn't match the real photos — revisit if per-slide captions are wanted later).
 
 ## History
 
