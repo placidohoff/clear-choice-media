@@ -51,6 +51,12 @@ In Progress
 - Branch: `feature/hero-carousel` (merged and deleted — see History).
 - Status: Done. Slides now include 3 real Cloudinary event photos plus the original placeholder; the "Featured Event" caption overlay is currently removed (placeholder captions didn't match the real photos — revisit if per-slide captions are wanted later).
 
+## Navigation Fix
+
+- Goal: The header (`NavHeader`) renders on every page, not just the homepage, but its nav links were plain `<a href="#services">` anchors. On any non-homepage route (e.g. `/admin/login`) those just appended a hash to the current URL with no matching element, so clicking a nav link did nothing. Per @context/features/navigation-fix.md, links must return to the homepage and then scroll to the right section.
+- Fix: Swapped the raw anchor tags for `next/link`'s `Link` with hrefs prefixed with `/` (e.g. `/#services`). Next.js's `Link` natively scrolls to the hash target after navigating to a different route, and still does an in-page scroll when already on `/`, so one code path covers both cases.
+- Branch: `fix/navigation-scroll`.
+
 ## History
 
 - 2026-09-02: Created feature branch feature/login-and-edit and added the initial owner-auth + content-edit flow.
