@@ -44,6 +44,7 @@ export const siteContentSchema = z.object({
     }),
   ),
   portfolioImages: z.array(z.string()),
+  videos: z.array(z.string()).min(1),
   contact: z.object({
     city: z.string(),
     serviceArea: z.string(),
@@ -156,6 +157,10 @@ export const defaultSiteContent: SiteContent = {
   portfolioImages: Array.from(
     { length: 40 },
     (_, i) => `https://res.cloudinary.com/rpwj7zbv/image/upload/pic-${i + 1}.png`,
+  ),
+  videos: Array.from(
+    { length: 9 },
+    (_, i) => `https://res.cloudinary.com/rpwj7zbv/video/upload/vid-${i + 1}.mp4`,
   ),
   contact: {
     city: "Providence, Rhode Island",

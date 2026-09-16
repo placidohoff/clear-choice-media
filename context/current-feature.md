@@ -73,6 +73,14 @@ In Progress
 	- The lightbox ignores pagination boundaries — prev/next inside the lightbox cycles through all 40 shuffled images continuously; pagination only affects what's visible in the grid itself.
 - Branch: `feature/gallery-pagination`.
 
+## Video Gallery
+
+- Goal: Per @context/features/video-gallery.md, show a real Cloudinary-hosted video in the homepage "Event Video" section (currently a static Unsplash image with a non-functional play button). One video plays at a time; when it ends, the next plays automatically; playback order is randomized; Prev/Next buttons let visitors cycle manually.
+- URL pattern: `https://res.cloudinary.com/rpwj7zbv/video/upload/vid-N.mp4` for N = 1..9 (version segment optional, same as the portfolio images). Confirmed working for vid-1..vid-5, vid-7..vid-9 during testing; `vid-6` returned a genuine 404 (not a rate-limit 423 like the others) — worth the user double-checking that one in Cloudinary.
+- Decisions: Shuffle the 9 videos once per page load (same pattern as the portfolio gallery), autoplay muted with a visible mute/unmute toggle (required by browser autoplay policy), auto-advance via the video's `ended` event, Prev/Next buttons step through the same shuffled order and loop.
+- New `videos: string[]` field added to `siteContentSchema` and `data/site-content.json` (top-level, alongside `portfolioImages`). New `app/components/VideoGallery.tsx` client component replaces the static image+play-button markup in the Event Video section.
+- Branch: `feature/video-gallery`.
+
 ## History
 
 - 2026-09-02: Created feature branch feature/login-and-edit and added the initial owner-auth + content-edit flow.

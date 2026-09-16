@@ -175,6 +175,17 @@
     "https://res.cloudinary.com/rpwj7zbv/image/upload/pic-39.png",
     "https://res.cloudinary.com/rpwj7zbv/image/upload/pic-40.png"
   ],
+  "videos": [
+    "https://res.cloudinary.com/rpwj7zbv/video/upload/vid-1.mp4",
+    "https://res.cloudinary.com/rpwj7zbv/video/upload/vid-2.mp4",
+    "https://res.cloudinary.com/rpwj7zbv/video/upload/vid-3.mp4",
+    "https://res.cloudinary.com/rpwj7zbv/video/upload/vid-4.mp4",
+    "https://res.cloudinary.com/rpwj7zbv/video/upload/vid-5.mp4",
+    "https://res.cloudinary.com/rpwj7zbv/video/upload/vid-6.mp4",
+    "https://res.cloudinary.com/rpwj7zbv/video/upload/vid-7.mp4",
+    "https://res.cloudinary.com/rpwj7zbv/video/upload/vid-8.mp4",
+    "https://res.cloudinary.com/rpwj7zbv/video/upload/vid-9.mp4"
+  ],
   "contact": {
     "city": "Providence, Rhode Island",
     "serviceArea": "Serving Rhode Island & Southern New England",
