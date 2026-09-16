@@ -153,18 +153,10 @@ export const defaultSiteContent: SiteContent = {
     { name: "Celebrations", subtitle: "Showers & reunions", icon: "◍" },
     { name: "Live Events", subtitle: "Concerts & performances", icon: "♫" },
   ],
-  portfolioImages: [
-    "https://res.cloudinary.com/rpwj7zbv/image/upload/pic-2.png",
-    "https://res.cloudinary.com/rpwj7zbv/image/upload/pic-5.png",
-    "https://res.cloudinary.com/rpwj7zbv/image/upload/pic-9.png",
-    "https://res.cloudinary.com/rpwj7zbv/image/upload/pic-13.png",
-    "https://res.cloudinary.com/rpwj7zbv/image/upload/pic-17.png",
-    "https://res.cloudinary.com/rpwj7zbv/image/upload/pic-21.png",
-    "https://res.cloudinary.com/rpwj7zbv/image/upload/pic-24.png",
-    "https://res.cloudinary.com/rpwj7zbv/image/upload/pic-28.png",
-    "https://res.cloudinary.com/rpwj7zbv/image/upload/pic-33.png",
-    "https://res.cloudinary.com/rpwj7zbv/image/upload/pic-39.png",
-  ],
+  portfolioImages: Array.from(
+    { length: 40 },
+    (_, i) => `https://res.cloudinary.com/rpwj7zbv/image/upload/pic-${i + 1}.png`,
+  ),
   contact: {
     city: "Providence, Rhode Island",
     serviceArea: "Serving Rhode Island & Southern New England",
