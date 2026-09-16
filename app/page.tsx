@@ -4,6 +4,7 @@ import Link from "next/link";
 import logoImage from "../context/screenshots/clear-choice-logo.jpg";
 import HeroCarousel from "@/app/components/HeroCarousel";
 import PortfolioLightbox from "@/app/components/PortfolioLightbox";
+import VideoGallery from "@/app/components/VideoGallery";
 import { readSiteContent } from "@/lib/site-content";
 
 export default async function Home() {
@@ -13,6 +14,7 @@ export default async function Home() {
   const boothCards = content.boothCards;
   const eventTypes = content.eventTypes;
   const portfolioImages = content.portfolioImages;
+  const videos = content.videos;
 
   return (
     <div className="min-h-screen w-full bg-[#071019] text-white" style={{overflowX: 'hidden'}}>
@@ -165,19 +167,7 @@ export default async function Home() {
             </div>
 
             <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-              <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[#0d1a22]">
-                <div className="relative">
-                  <img
-                    src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1400&q=80"
-                    alt="Event video highlight reel"
-                    className="h-[520px] w-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#071019]/70 via-[#071019]/20 to-transparent" />
-                  <button className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white/80 bg-white/10 text-3xl backdrop-blur-sm">
-                    ▶
-                  </button>
-                </div>
-              </div>
+              <VideoGallery videos={videos} />
 
               <div className="flex flex-col justify-center rounded-[2rem] border border-white/10 bg-[#0d1a22] p-8">
                 <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-[#7cd3ff]">Event Video</p>
