@@ -64,6 +64,15 @@ In Progress
 - Added a click-to-open lightbox: a new `PortfolioLightbox` client component wraps the grid; clicking any tile opens a full-screen overlay with prev/next arrows, a close button, click-outside-to-close, and Escape/arrow-key support. No autoplay — manual navigation only.
 - Branch: `feature/portfolio-gallery`.
 
+## Gallery Pagination
+
+- Goal: Per @context/features/gallery-pagination.md, expand the portfolio gallery to include all 40 Cloudinary photos (pic-1..pic-40) instead of the curated 10, shown in random order, 10 at a time with pagination.
+- Decisions:
+	- `data/site-content.json`'s `portfolioImages` now lists all 40 URLs (pic-1..pic-40) in natural order; `PortfolioLightbox` shuffles a copy once per mount (stable across pagination within a page load, re-shuffled on the next full page load) rather than storing a random order in the data file.
+	- Pagination: Prev/Next buttons with a "Page X of 4" label (no direct-jump page numbers).
+	- The lightbox ignores pagination boundaries — prev/next inside the lightbox cycles through all 40 shuffled images continuously; pagination only affects what's visible in the grid itself.
+- Branch: `feature/gallery-pagination`.
+
 ## History
 
 - 2026-09-02: Created feature branch feature/login-and-edit and added the initial owner-auth + content-edit flow.
