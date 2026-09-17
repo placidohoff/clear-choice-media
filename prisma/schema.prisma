@@ -45,3 +45,20 @@ model MediaAsset {
 
   @@map("media_assets")
 }
+
+model ContactSubmission {
+  id                  String   @id @default(cuid())
+  name                String
+  email               String
+  phone               String
+  eventDate           DateTime
+  eventTime           String
+  eventType           String
+  eventLocation       String
+  servicesInterested  String[]
+  estimatedGuestCount Int?
+  details             String?
+  createdAt           DateTime @default(now())
+
+  @@map("contact_submissions")
+}

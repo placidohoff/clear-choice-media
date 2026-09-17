@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import logoImage from "../context/screenshots/clear-choice-logo.jpg";
+import ContactForm from "@/app/components/ContactForm";
 import HeroCarousel from "@/app/components/HeroCarousel";
 import PortfolioLightbox from "@/app/components/PortfolioLightbox";
 import VideoGallery from "@/app/components/VideoGallery";
@@ -262,43 +263,7 @@ export default async function Home() {
                 </div>
               </div>
 
-              <form className="grid gap-4 rounded-[1.5rem] bg-[#0b1821] p-6 ring-1 ring-white/10">
-                <div className="grid gap-4 md:grid-cols-2">
-                  <label className="grid gap-2 text-sm uppercase tracking-[0.18em] text-slate-300">
-                    Name
-                    <input className="rounded-xl border border-white/10 bg-[#0f212d] px-4 py-3 text-base text-white outline-none" placeholder="Your name" />
-                  </label>
-                  <label className="grid gap-2 text-sm uppercase tracking-[0.18em] text-slate-300">
-                    Email
-                    <input className="rounded-xl border border-white/10 bg-[#0f212d] px-4 py-3 text-base text-white outline-none" placeholder="Your email" />
-                  </label>
-                </div>
-
-                <div className="grid gap-4 md:grid-cols-2">
-                  <label className="grid gap-2 text-sm uppercase tracking-[0.18em] text-slate-300">
-                    Phone
-                    <input className="rounded-xl border border-white/10 bg-[#0f212d] px-4 py-3 text-base text-white outline-none" placeholder="Your phone" />
-                  </label>
-                  <label className="grid gap-2 text-sm uppercase tracking-[0.18em] text-slate-300">
-                    Event Date
-                    <input className="rounded-xl border border-white/10 bg-[#0f212d] px-4 py-3 text-base text-white outline-none" placeholder="MM/DD/YYYY" />
-                  </label>
-                </div>
-
-                <label className="grid gap-2 text-sm uppercase tracking-[0.18em] text-slate-300">
-                  Event Type
-                  <input className="rounded-xl border border-white/10 bg-[#0f212d] px-4 py-3 text-base text-white outline-none" placeholder="Wedding, corporate, party, etc." />
-                </label>
-
-                <label className="grid gap-2 text-sm uppercase tracking-[0.18em] text-slate-300">
-                  Project Details
-                  <textarea className="min-h-[140px] rounded-xl border border-white/10 bg-[#0f212d] px-4 py-3 text-base text-white outline-none" placeholder="Tell us about your event" />
-                </label>
-
-                <button className="mt-2 rounded-full bg-[#7cd3ff] px-6 py-4 text-[11px] font-bold uppercase tracking-[0.2em] text-[#091923] transition duration-200 hover:-translate-y-0.5 hover:bg-[#8ad8ff] hover:shadow-[0_14px_32px_rgba(124,211,255,0.22)]">
-                  Send Inquiry
-                </button>
-              </form>
+              <ContactForm eventTypes={eventTypes} />
             </div>
           </div>
         </section>
@@ -344,7 +309,7 @@ export default async function Home() {
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#7cd3ff]">Contact</p>
             <ul className="mt-5 space-y-3 text-base text-slate-300">
-              <li className="transition hover:text-[#7cd3ff]">hello@clearchoicemedia.com</li>
+              <li className="transition hover:text-[#7cd3ff]">Clifton@clearchoicemedia.co</li>
               <li className="transition hover:text-[#7cd3ff]">Providence, RI</li>
               <li className="transition hover:text-[#7cd3ff]">Call</li>
             </ul>

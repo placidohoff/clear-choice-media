@@ -75,6 +75,12 @@ export default async function AdminDashboardPage() {
               >
                 Image Manager
               </Link>
+              <Link
+                href="/admin/inquiries"
+                className="rounded-full border border-white/15 px-5 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-200"
+              >
+                Inquiries
+              </Link>
             </div>
           </div>
 

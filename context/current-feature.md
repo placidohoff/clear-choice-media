@@ -81,6 +81,18 @@ In Progress
 - New `videos: string[]` field added to `siteContentSchema` and `data/site-content.json` (top-level, alongside `portfolioImages`). New `app/components/VideoGallery.tsx` client component replaces the static image+play-button markup in the Event Video section.
 - Branch: `feature/video-gallery`.
 
+## Contact Form
+
+- Goal: Per @context/features/contact-form.md, the homepage contact form should validate input, save submissions to the database (not send email), and be viewable via an admin page. Success shows a modal and clears the form. Event type becomes a dropdown; date/time selection uses a visual calendar + time input.
+- Decisions:
+	- Email notification explicitly out of scope for now (no email provider configured) — DB-only.
+	- Form fields expanded to match project-overview.md's recommended set: Name, Email, Phone, Event Date, Event Type (dropdown), Event Location, Services Interested In (multi-select), Estimated Guest Count, Additional Details.
+	- Time selection: simple native time input alongside a `react-day-picker` visual calendar (no full custom time-slot grid).
+	- Migration history didn't exist yet (prior schema changes used `db push`, not `migrate dev`/`deploy`) — set up properly: a baseline migration representing the existing User/SiteContent/MediaAsset tables (marked `resolve --applied` once, manually, from a network where Neon's port isn't blocked), then a real migration adding `ContactSubmission`. `prisma migrate deploy` added to the `start` script so Render applies future migrations automatically.
+- Also updated the business's real contact email (`Clifton@clearchoicemedia.co`) and phone (`+1 (401) 442-2321`) in `data/site-content.json`, `lib/site-content.ts`, and the footer in `app/page.tsx`, replacing the `hello@clearchoicemedia.com` / `(555) 123-4567` placeholders — bundled into this branch per user request.
+- Branch: `feature/contact-form` (merged and deleted — see History).
+- Status: Done. See @context/features/contact-form.md for full implementation notes.
+
 ## History
 
 - 2026-09-02: Created feature branch feature/login-and-edit and added the initial owner-auth + content-edit flow.
@@ -90,3 +102,8 @@ In Progress
 - 2026-09-04: Created feature branch `feature/images-database` and added images-database notes.
 - 2026-09-11: Created and merged branch `fix/neon-http-adapter` — admin login was throwing `PrismaClientKnownRequestError` because the network blocks outbound Postgres TCP (5432) to Neon. Switched `lib/prisma.ts` from `@prisma/adapter-pg` to `@prisma/adapter-neon`'s `PrismaNeonHttp`, which queries over HTTPS (443) instead, and reconciled it with the existing lazy-init Proxy pattern from master. Branch deleted after merge.
 - 2026-09-11: Created branch `feature/hero-carousel` and implemented the hero image carousel. Replaced `hero.featuredEventImage`/`featuredEventName`/`featuredEventMeta` with a `hero.slides` array in `data/site-content.json` and the `siteContentSchema`. New `app/components/HeroCarousel.tsx` client component autoplays through the slides (~6s interval) with a synchronized crossfade between the dimmed background panel and the foreground featured-event card. Seeded with 3 real Cloudinary event photos plus the original placeholder; the "Featured Event" caption overlay was removed for now since the placeholder captions didn't match the real photos.
+- 2026-09-11: Created and merged branch `fix/navigation-scroll` — nav links only worked while already on the homepage. Switched to `next/link` with `/#section` hrefs.
+- 2026-09-13: Created and merged branch `feature/portfolio-gallery` — replaced the 4 Unsplash portfolio placeholders with 10 real Cloudinary photos in a varied bento grid with hover zoom, plus a click-to-open `PortfolioLightbox` component (prev/next, close, keyboard support).
+- 2026-09-13: Created and merged branch `feature/gallery-pagination` — expanded the portfolio gallery to all 40 Cloudinary photos, shuffled once per page load and paginated 10 at a time (Prev/Next); the lightbox cycles through the full shuffled set regardless of page.
+- 2026-09-16: Created and merged branch `feature/video-gallery` — added `VideoGallery` client component to the Event Video section: 9 Cloudinary videos shuffled once per load, autoplay muted with unmute toggle, auto-advance on end, Prev/Next controls.
+- 2026-09-17: Created and merged branch `feature/contact-form` — DB-backed contact form (new `ContactSubmission` Prisma model, first real migration history for this project), expanded fields, visual calendar + time picker, event-type dropdown, services checkboxes, success modal, and a new protected `/admin/inquiries` viewer. Also updated the site's real contact email/phone. See @context/features/contact-form.md for full details.
