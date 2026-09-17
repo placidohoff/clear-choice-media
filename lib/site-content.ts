@@ -165,8 +165,8 @@ export const defaultSiteContent: SiteContent = {
   contact: {
     city: "Providence, Rhode Island",
     serviceArea: "Serving Rhode Island & Southern New England",
-    email: "hello@clearchoicemedia.com",
-    phone: "+1 (555) 123-4567",
+    email: "Clifton@clearchoicemedia.co",
+    phone: "+1 (401) 442-2321",
   },
 };
 
