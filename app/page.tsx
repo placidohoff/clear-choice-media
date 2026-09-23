@@ -1,12 +1,19 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import logoImage from "../context/screenshots/clear-choice-logo.jpg";
+import ComingSoonButton from "@/app/components/ComingSoonButton";
 import ContactForm from "@/app/components/ContactForm";
 import HeroCarousel from "@/app/components/HeroCarousel";
 import PortfolioLightbox from "@/app/components/PortfolioLightbox";
+import SectionLink from "@/app/components/SectionLink";
 import VideoGallery from "@/app/components/VideoGallery";
 import { readSiteContent } from "@/lib/site-content";
+
+const SERVICE_LINKS: Record<string, string> = {
+  "Event Photography": "/#portfolio",
+  "Photo Booth Experiences": "/#booths",
+  "Event Video": "/#video",
+};
 
 export default async function Home() {
   const content = await readSiteContent();
@@ -52,9 +59,12 @@ export default async function Home() {
                 <div className="p-6">
                   <h3 className="text-4xl font-bold uppercase tracking-[-0.05em] text-white">{service.title}</h3>
                   <p className="mt-3 text-lg leading-8 text-slate-300">{service.description}</p>
-                  <button className="mt-6 text-[11px] font-bold uppercase tracking-[0.2em] text-white transition hover:text-[#7cd3ff]">
+                  <SectionLink
+                    href={SERVICE_LINKS[service.title] ?? "/#contact"}
+                    className="mt-6 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-white transition hover:text-[#7cd3ff]"
+                  >
                     {service.cta} →
-                  </button>
+                  </SectionLink>
                 </div>
               </article>
             ))}
@@ -97,9 +107,12 @@ export default async function Home() {
               ))}
             </div>
 
-            <button className="mt-10 rounded-full bg-[#e9eef2] px-7 py-4 text-[11px] font-bold uppercase tracking-[0.2em] text-[#091923] transition duration-200 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_12px_28px_rgba(124,211,255,0.18)]">
+            <SectionLink
+              href="/#contact"
+              className="mt-10 inline-block rounded-full bg-[#e9eef2] px-7 py-4 text-[11px] font-bold uppercase tracking-[0.2em] text-[#091923] transition duration-200 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_12px_28px_rgba(124,211,255,0.18)]"
+            >
               Explore Photo Booth Experiences →
-            </button>
+            </SectionLink>
           </div>
         </section>
 
@@ -147,9 +160,9 @@ export default async function Home() {
                 <div className="h-px w-12 bg-white/40" />
                 <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-slate-300">Recent Work</p>
               </div>
-              <button className="text-[11px] font-bold uppercase tracking-[0.25em] text-white transition hover:text-[#7cd3ff]">
+              <SectionLink href="/#contact" className="text-[11px] font-bold uppercase tracking-[0.25em] text-white transition hover:text-[#7cd3ff]">
                 Start Your Project →
-              </button>
+              </SectionLink>
             </div>
 
             <h2 className="text-5xl font-bold uppercase leading-[0.9] tracking-[-0.06em] text-white sm:text-6xl lg:text-[7rem]">
@@ -178,9 +191,12 @@ export default async function Home() {
                 <p className="mt-5 text-lg leading-8 text-slate-300">
                   From highlight films to reels and recap content, we create polished video that keeps your event feeling alive long after it ends.
                 </p>
-                <button className="mt-8 rounded-full bg-[#7cd3ff] px-6 py-3 text-[11px] font-bold uppercase tracking-[0.2em] text-[#091923] transition duration-200 hover:-translate-y-0.5 hover:bg-[#8ad8ff] hover:shadow-[0_14px_30px_rgba(124,211,255,0.2)]">
-                  Explore Video →
-                </button>
+                <ComingSoonButton
+                  label="Explore Video →"
+                  message="A dedicated video packages page is coming soon. In the meantime, reach out and we'll help plan your event video coverage."
+                  contactCta
+                  className="mt-8 inline-block rounded-full bg-[#7cd3ff] px-6 py-3 text-[11px] font-bold uppercase tracking-[0.2em] text-[#091923] transition duration-200 hover:-translate-y-0.5 hover:bg-[#8ad8ff] hover:shadow-[0_14px_30px_rgba(124,211,255,0.2)]"
+                />
               </div>
             </div>
           </div>
@@ -205,9 +221,12 @@ export default async function Home() {
                 <p className="mt-5 text-lg leading-8 text-slate-300">
                   We help businesses turn events into content, engagement, and brand momentum with photography, video, booth activations, and social media coverage.
                 </p>
-                <button className="mt-8 rounded-full bg-[#7cd3ff] px-7 py-4 text-[11px] font-bold uppercase tracking-[0.2em] text-[#091923] transition duration-200 hover:-translate-y-0.5 hover:bg-[#8ad8ff] hover:shadow-[0_14px_30px_rgba(124,211,255,0.2)]">
+                <SectionLink
+                  href="/#contact"
+                  className="mt-8 inline-block rounded-full bg-[#7cd3ff] px-7 py-4 text-[11px] font-bold uppercase tracking-[0.2em] text-[#091923] transition duration-200 hover:-translate-y-0.5 hover:bg-[#8ad8ff] hover:shadow-[0_14px_30px_rgba(124,211,255,0.2)]"
+                >
                   Plan Your Corporate Event
-                </button>
+                </SectionLink>
               </div>
             </div>
           </div>
@@ -224,9 +243,12 @@ export default async function Home() {
                 <p className="mt-5 text-lg leading-8 text-slate-300">
                   From the quiet details to the joyful moments on the dance floor, we photograph and film every chapter of your celebration with care and intention.
                 </p>
-                <button className="mt-8 rounded-full bg-[#7cd3ff] px-7 py-4 text-[11px] font-bold uppercase tracking-[0.2em] text-[#091923] transition duration-200 hover:-translate-y-0.5 hover:bg-[#8ad8ff] hover:shadow-[0_14px_30px_rgba(124,211,255,0.2)]">
-                  View Wedding Services
-                </button>
+                <ComingSoonButton
+                  label="View Wedding Services"
+                  message="A dedicated wedding services page is coming soon. In the meantime, reach out and we'll help plan your wedding coverage."
+                  contactCta
+                  className="mt-8 inline-block rounded-full bg-[#7cd3ff] px-7 py-4 text-[11px] font-bold uppercase tracking-[0.2em] text-[#091923] transition duration-200 hover:-translate-y-0.5 hover:bg-[#8ad8ff] hover:shadow-[0_14px_30px_rgba(124,211,255,0.2)]"
+                />
               </div>
 
               <div className="overflow-hidden rounded-[1.8rem] bg-[#101f2a]">
@@ -289,29 +311,37 @@ export default async function Home() {
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#7cd3ff]">Navigation</p>
             <ul className="mt-5 space-y-3 text-base text-slate-300">
-              <li className="transition hover:text-[#7cd3ff]">Photography</li>
-              <li className="transition hover:text-[#7cd3ff]">Photo Booths</li>
-              <li className="transition hover:text-[#7cd3ff]">Video</li>
-              <li className="transition hover:text-[#7cd3ff]">Corporate</li>
+              <li><SectionLink href="/#services" className="transition hover:text-[#7cd3ff]">Photography</SectionLink></li>
+              <li><SectionLink href="/#booths" className="transition hover:text-[#7cd3ff]">Photo Booths</SectionLink></li>
+              <li><SectionLink href="/#video" className="transition hover:text-[#7cd3ff]">Video</SectionLink></li>
+              <li><SectionLink href="/#corporate" className="transition hover:text-[#7cd3ff]">Corporate</SectionLink></li>
             </ul>
           </div>
 
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#7cd3ff]">Company</p>
             <ul className="mt-5 space-y-3 text-base text-slate-300">
-              <li className="transition hover:text-[#7cd3ff]">Portfolio</li>
-              <li className="transition hover:text-[#7cd3ff]">About</li>
-              <li className="transition hover:text-[#7cd3ff]">Reviews</li>
-              <li className="transition hover:text-[#7cd3ff]">Contact</li>
+              <li><SectionLink href="/#portfolio" className="transition hover:text-[#7cd3ff]">Portfolio</SectionLink></li>
+              <li><SectionLink href="/#about" className="transition hover:text-[#7cd3ff]">About</SectionLink></li>
+              <li><ComingSoonButton label="Reviews" className="text-left transition hover:text-[#7cd3ff]" /></li>
+              <li><SectionLink href="/#contact" className="transition hover:text-[#7cd3ff]">Contact</SectionLink></li>
             </ul>
           </div>
 
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#7cd3ff]">Contact</p>
             <ul className="mt-5 space-y-3 text-base text-slate-300">
-              <li className="transition hover:text-[#7cd3ff]">Clifton@clearchoicemedia.co</li>
-              <li className="transition hover:text-[#7cd3ff]">Providence, RI</li>
-              <li className="transition hover:text-[#7cd3ff]">Call</li>
+              <li>
+                <a href={`mailto:${content.contact.email}`} className="transition hover:text-[#7cd3ff]">
+                  {content.contact.email}
+                </a>
+              </li>
+              <li className="text-slate-300">{content.contact.city}</li>
+              <li>
+                <a href={`tel:${content.contact.phone.replace(/[^+\d]/g, "")}`} className="transition hover:text-[#7cd3ff]">
+                  Call
+                </a>
+              </li>
             </ul>
           </div>
         </div>

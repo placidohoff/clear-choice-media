@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import SectionLink from "@/app/components/SectionLink";
+
 type HeroSlide = {
   image: string;
   eventName: string;
@@ -73,12 +75,12 @@ export default function HeroCarousel({ hero }: { hero: HeroContent }) {
           </p>
 
           <div className="mt-6 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap">
-            <button className="rounded-full bg-[#7cd3ff] px-5 py-3 text-[10px] font-bold uppercase tracking-[0.18em] text-[#091923] transition duration-200 hover:-translate-y-0.5 hover:bg-[#8ad8ff] hover:shadow-[0_14px_32px_rgba(124,211,255,0.25)] sm:px-7 sm:py-4 sm:text-[11px] sm:tracking-[0.2em]">
+            <SectionLink href="/#contact" className="rounded-full bg-[#7cd3ff] px-5 py-3 text-[10px] font-bold uppercase tracking-[0.18em] text-[#091923] transition duration-200 hover:-translate-y-0.5 hover:bg-[#8ad8ff] hover:shadow-[0_14px_32px_rgba(124,211,255,0.25)] sm:px-7 sm:py-4 sm:text-[11px] sm:tracking-[0.2em]">
               {hero.primaryCta}
-            </button>
-            <button className="rounded-full border border-white/20 bg-white/5 px-5 py-3 text-[10px] font-bold uppercase tracking-[0.18em] text-white transition duration-200 hover:-translate-y-0.5 hover:border-[#7cd3ff]/60 hover:bg-[#7cd3ff]/10 sm:px-7 sm:py-4 sm:text-[11px] sm:tracking-[0.2em]">
+            </SectionLink>
+            <SectionLink href="/#portfolio" className="rounded-full border border-white/20 bg-white/5 px-5 py-3 text-[10px] font-bold uppercase tracking-[0.18em] text-white transition duration-200 hover:-translate-y-0.5 hover:border-[#7cd3ff]/60 hover:bg-[#7cd3ff]/10 sm:px-7 sm:py-4 sm:text-[11px] sm:tracking-[0.2em]">
               {hero.secondaryCta}
-            </button>
+            </SectionLink>
           </div>
         </div>
 

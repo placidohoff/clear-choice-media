@@ -93,6 +93,14 @@ In Progress
 - Branch: `feature/contact-form` (merged and deleted — see History).
 - Status: Done. See @context/features/contact-form.md for full implementation notes.
 
+## Button Functionalities (Fix Links)
+
+- Goal: Per @context/features/fix-links.md, every button/link on the homepage should lead somewhere or do something — scroll to the appropriate section, or show a "Coming Soon" modal if no appropriate section exists.
+- Full audit and proposed mapping confirmed with user before implementing (see @context/features/fix-links.md) — clear section-id matches get real links; most action/conversion CTAs with no dedicated section (Plan Your Corporate Event, Start Your Project, the booths section's bottom CTA) route to `/#contact` since the contact form is a genuine working destination for them. "Explore Video" and "View Wedding Services" show a "Coming Soon" modal with a "Contact Us" button instead (per user follow-up), and footer "Reviews" shows a plain "Coming Soon" modal (no reviews section/data exists anywhere yet — it's only ever been a documented future item in project-overview.md).
+- Also fixes a pre-existing bug in `HeroCarousel.tsx`'s CTAs (`#contact`/`#portfolio` hrefs were missing the `/` prefix from the navigation fix, so they wouldn't have worked from non-homepage routes), and a repeat-click scroll bug where clicking a different button to a hash you're already on did nothing (fixed via the new `SectionLink` component — see @context/features/fix-links.md).
+- Branch: `feature/fix-links` (merged and deleted — see History).
+- Status: Done. See @context/features/fix-links.md for full implementation notes.
+
 ## History
 
 - 2026-09-02: Created feature branch feature/login-and-edit and added the initial owner-auth + content-edit flow.
@@ -107,3 +115,4 @@ In Progress
 - 2026-09-13: Created and merged branch `feature/gallery-pagination` — expanded the portfolio gallery to all 40 Cloudinary photos, shuffled once per page load and paginated 10 at a time (Prev/Next); the lightbox cycles through the full shuffled set regardless of page.
 - 2026-09-16: Created and merged branch `feature/video-gallery` — added `VideoGallery` client component to the Event Video section: 9 Cloudinary videos shuffled once per load, autoplay muted with unmute toggle, auto-advance on end, Prev/Next controls.
 - 2026-09-17: Created and merged branch `feature/contact-form` — DB-backed contact form (new `ContactSubmission` Prisma model, first real migration history for this project), expanded fields, visual calendar + time picker, event-type dropdown, services checkboxes, success modal, and a new protected `/admin/inquiries` viewer. Also updated the site's real contact email/phone. See @context/features/contact-form.md for full details.
+- 2026-09-23: Created and merged branch `feature/fix-links` — full audit and fix of every button/link on the homepage (service cards, section CTAs, footer nav/company/contact lists). New `ComingSoonButton` component for genuinely unbuilt destinations (footer Reviews; also "Explore Video"/"View Wedding Services" with a Contact Us action per follow-up). New `SectionLink` component fixes a Next.js `Link` quirk where clicking a different button to a hash you're already on did nothing. See @context/features/fix-links.md for full details.
