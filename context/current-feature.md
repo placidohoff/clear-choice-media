@@ -101,6 +101,17 @@ In Progress
 - Branch: `feature/fix-links` (merged and deleted — see History).
 - Status: Done. See @context/features/fix-links.md for full implementation notes.
 
+## Live Hosting (Custom Domain)
+
+- Goal: Per @context/features/live-hosting.md, point the owned domain `clearchoicemedia.co` at the Render-hosted app instead of the `.onrender.com` URL.
+- This is primarily an account-level task (Render dashboard's Custom Domains UI + DNS records at the registrar) that Claude cannot perform directly — no Render/registrar access. Walked the user through it live, verifying DNS/HTTP status from this environment at each step.
+- Confirmed with user: apex domain (`clearchoicemedia.co`) as canonical, not `www`.
+- Code-side change: added `metadataBase` to `app/layout.tsx` pointing at `https://clearchoicemedia.co`, so relative Open Graph/canonical URLs resolve correctly. No hardcoded `onrender.com` references existed anywhere in the codebase, so nothing else needed changing there.
+- Domain was registered at **GoDaddy** (not Squarespace, despite Squarespace showing it as "connected" to a Squarespace site — GoDaddy's nameservers are authoritative). Removed Squarespace's hosting records at GoDaddy's DNS zone and added Render's (`A` `@` → `216.24.57.1`, `CNAME` `www` → `clear-choice-media.onrender.com`). Full record-by-record detail in @context/features/live-hosting.md.
+- Result: `https://clearchoicemedia.co` live and verified (`200 OK`). `www.clearchoicemedia.co`'s certificate issued shortly after (as expected) and now correctly `301`-redirects to the apex. User updated `NEXT_PUBLIC_APP_URL` in Render's environment variables to `https://clearchoicemedia.co`.
+- Branch: `feature/live-hosting` (merged and deleted — see History).
+- Status: Done. Domain fully live on both apex and www. See @context/features/live-hosting.md for full implementation notes.
+
 ## History
 
 - 2026-09-02: Created feature branch feature/login-and-edit and added the initial owner-auth + content-edit flow.
@@ -116,3 +127,4 @@ In Progress
 - 2026-09-16: Created and merged branch `feature/video-gallery` — added `VideoGallery` client component to the Event Video section: 9 Cloudinary videos shuffled once per load, autoplay muted with unmute toggle, auto-advance on end, Prev/Next controls.
 - 2026-09-17: Created and merged branch `feature/contact-form` — DB-backed contact form (new `ContactSubmission` Prisma model, first real migration history for this project), expanded fields, visual calendar + time picker, event-type dropdown, services checkboxes, success modal, and a new protected `/admin/inquiries` viewer. Also updated the site's real contact email/phone. See @context/features/contact-form.md for full details.
 - 2026-09-23: Created and merged branch `feature/fix-links` — full audit and fix of every button/link on the homepage (service cards, section CTAs, footer nav/company/contact lists). New `ComingSoonButton` component for genuinely unbuilt destinations (footer Reviews; also "Explore Video"/"View Wedding Services" with a Contact Us action per follow-up). New `SectionLink` component fixes a Next.js `Link` quirk where clicking a different button to a hash you're already on did nothing. See @context/features/fix-links.md for full details.
+- 2026-09-24: Created and merged branch `feature/live-hosting`, added `metadataBase` to `app/layout.tsx`, and walked the user through pointing `clearchoicemedia.co` (registered at GoDaddy) at Render — removing Squarespace's hosting DNS records and adding Render's. Both apex and `www` confirmed fully live with valid SSL; `NEXT_PUBLIC_APP_URL` updated in Render's environment. See @context/features/live-hosting.md for full details.
