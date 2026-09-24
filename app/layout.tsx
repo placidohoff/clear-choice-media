@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://clearchoicemedia.co"),
   title: "Clear Choice Media | Event Photography & Photo Booth Experiences",
   description:
     "Premium event photography, video production, and photo booth experiences for weddings, corporate events, and celebrations across Rhode Island and Southern New England.",
