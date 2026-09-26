@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function shuffle<T>(items: T[]): T[] {
   const result = [...items];
@@ -12,9 +12,19 @@ function shuffle<T>(items: T[]): T[] {
 }
 
 export default function VideoGallery({ videos }: { videos: string[] }) {
-  const [shuffled] = useState(() => shuffle(videos));
+  // Start with the server-matching order to avoid a hydration mismatch, then
+  // shuffle once on the client after mount (Math.random() can't run during
+  // the initial render without diverging between server and client).
+  const [shuffled, setShuffled] = useState(videos);
   const [index, setIndex] = useState(0);
   const [muted, setMuted] = useState(true);
+
+  useEffect(() => {
+    // Must run in an effect: this is client-only randomness, not state
+    // derivable during render without reintroducing the hydration mismatch.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setShuffled(shuffle(videos));
+  }, [videos]);
 
   const showPrev = () => setIndex((i) => (i - 1 + shuffled.length) % shuffled.length);
   const showNext = () => setIndex((i) => (i + 1) % shuffled.length);

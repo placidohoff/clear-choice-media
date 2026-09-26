@@ -27,9 +27,19 @@ function shuffle<T>(items: T[]): T[] {
 }
 
 export default function PortfolioLightbox({ images }: { images: string[] }) {
-  const [shuffled] = useState(() => shuffle(images));
+  // Start with the server-matching order to avoid a hydration mismatch, then
+  // shuffle once on the client after mount (Math.random() can't run during
+  // the initial render without diverging between server and client).
+  const [shuffled, setShuffled] = useState(images);
   const [page, setPage] = useState(0);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    // Must run in an effect: this is client-only randomness, not state
+    // derivable during render without reintroducing the hydration mismatch.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setShuffled(shuffle(images));
+  }, [images]);
 
   const totalPages = Math.max(1, Math.ceil(shuffled.length / PAGE_SIZE));
   const pageImages = shuffled.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
