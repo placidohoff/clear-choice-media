@@ -44,9 +44,8 @@ export default function AdminLoginPage() {
               name="email"
               type="email"
               required
-              defaultValue="placido.hoff@gmail.com"
               className="w-full rounded-xl border border-white/10 bg-[#0f212d] px-4 py-3 text-base text-white outline-none ring-0 placeholder:text-slate-500"
-              placeholder="owner@clearchoicemedia.com"
+              placeholder="Enter email"
             />
           </label>
 
@@ -58,7 +57,6 @@ export default function AdminLoginPage() {
               name="password"
               type="password"
               required
-              defaultValue="ThisIsASecurePassword123!"
               className="w-full rounded-xl border border-white/10 bg-[#0f212d] px-4 py-3 text-base text-white outline-none ring-0 placeholder:text-slate-500"
               placeholder="Enter password"
             />
@@ -79,9 +77,6 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        <p className="mt-6 text-sm text-slate-400">
-          Use the owner credentials in your environment variables to sign in.
-        </p>
       </div>
     </main>
   );

@@ -115,6 +115,25 @@ export async function listAdminUsers() {
   });
 }
 
+export async function setContactSubmissionResolved(formData: FormData): Promise<void> {
+  await requireAdminSession();
+
+  const id = String(formData.get("id") ?? "");
+  const resolved = formData.get("resolved") === "true";
+
+  if (!id) {
+    redirect("/admin/inquiries");
+  }
+
+  await prisma.contactSubmission.update({
+    where: { id },
+    data: { resolved },
+  });
+
+  revalidatePath("/admin/inquiries");
+  redirect("/admin/inquiries");
+}
+
 export async function createAdminUser(formData: FormData): Promise<void> {
   const session = await requireAdminSession();
 

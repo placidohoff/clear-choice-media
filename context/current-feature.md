@@ -144,6 +144,14 @@ In Progress
 - Branch: `feature/image-slider-fix` (merged and deleted — see History).
 - Status: Done. See @context/features/image-slider-fix.md for full implementation notes.
 
+## Admin Section Adjustments
+
+- Goal: Per @context/features/admin-section-adjustments.md — (1) `/admin/login`'s email/password fields were pre-filled with real credentials via `defaultValue` (a genuine security issue — visible in page source to anyone), should always start blank; (2) the admin dashboard's "Edit public content" card header doesn't stack on mobile (fixed `flex justify-between` row with 3 buttons, no responsive fallback, unlike the page header above it which already handles this), causing cutoff; (3) `/admin/inquiries` needs a way to resolve/remove inquiries.
+- Confirmed with user: resolve = mark as resolved and keep the record (not permanent delete) — adds a `resolved` boolean to `ContactSubmission`, needs a small migration (same connection-free `--from-schema`/`--to-schema` diff approach as the contact-form migration). Network access to Neon's direct port happened to be open this session, so it was applied via a normal `prisma migrate deploy` rather than needing the HTTP-client workaround.
+- Verified with user in browser: login starts blank, the button row stacks correctly on narrow screens, and Mark Resolved/Unresolved works.
+- Branch: `feature/admin-section-adjustments` (merged and deleted — see History).
+- Status: Done. See @context/features/admin-section-adjustments.md for full implementation notes.
+
 ## History
 
 - 2026-09-02: Created feature branch feature/login-and-edit and added the initial owner-auth + content-edit flow.
@@ -163,3 +171,4 @@ In Progress
 - 2026-09-26: Created and merged branch `feature/contact-form-adjustments` — added Resend email notifications on contact form submission (to `Clifton@clearchoicemedia.co`, DB save still happens first and is authoritative) and fixed mobile responsiveness (padding compounding across nested containers, and a malformed multi-field `<label>`). Domain verified on Resend using DNS records at GoDaddy. Verified end-to-end with a real form submission. See @context/features/contact-form-adjustments.md for full details.
 - 2026-09-26: Created and merged branch `feature/mobile-optimizations` — fixed the ~400px horizontal cutoff (root `overflowX` changed to `'auto'`) and made the mobile nav menu internally scrollable with a body-scroll lock. Also bundled in (per user, mid-flow): removed the business phone and email from all public display (contact section, footer) since the client wants visitors to use the contact form exclusively; redesigned the footer's Contact column into a region line + "Get In Touch" link. See @context/mobile-optimization.md for full details.
 - 2026-09-26: Created and merged branch `feature/image-slider-fix` — fixed a Next.js hydration mismatch (`Math.random()` shuffle running differently on server vs. client) that caused the portfolio lightbox to open a seemingly-random wrong photo. Deferred shuffling to a post-mount `useEffect` in both `PortfolioLightbox.tsx` and (proactively) `VideoGallery.tsx`, which had the same unsafe pattern. Verified with user. See @context/features/image-slider-fix.md for full details.
+- 2026-09-27: Created and merged branch `feature/admin-section-adjustments` — removed hardcoded admin credentials that were pre-filling the login form (a real security issue, visible in page source), fixed the admin dashboard's non-responsive button row, and added resolve/unresolve to `/admin/inquiries` (new `resolved` field + migration, new `setContactSubmissionResolved` action, open/resolved sections in the UI). See @context/features/admin-section-adjustments.md for full details.
