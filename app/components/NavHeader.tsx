@@ -2,12 +2,25 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logoImage from "../../context/screenshots/clear-choice-logo.jpg";
 import SectionLink from "@/app/components/SectionLink";
 
 export default function NavHeader({ navItems, primaryCta }: { navItems: any[]; primaryCta?: string }) {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open]);
 
   return (
     <header className="fixed inset-x-0 top-0 z-[9999] w-full border-b border-white/10 bg-[#050d14]/95 backdrop-blur-md">
@@ -75,7 +88,7 @@ export default function NavHeader({ navItems, primaryCta }: { navItems: any[]; p
 
       {/* Mobile menu overlay - absolute so it doesn't push content */}
       {open && (
-        <div className="lg:hidden absolute inset-x-0 top-full z-[9998] bg-[#050d14]/95">
+        <div className="lg:hidden absolute inset-x-0 top-full z-[9998] max-h-[calc(100vh-64px)] overflow-y-auto bg-[#050d14]/95">
           <div className="px-4 py-4">
             <nav className="flex flex-col gap-2 text-[12px] font-medium uppercase tracking-[0.18em] text-slate-200">
               {navItems?.map((item: any) => (
