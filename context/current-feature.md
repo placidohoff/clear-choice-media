@@ -134,6 +134,16 @@ In Progress
 - Branch: `feature/mobile-optimizations` (merged and deleted — see History).
 - Status: Done. See @context/mobile-optimization.md for full implementation notes.
 
+## Portfolio Images Slider Correction
+
+- Goal: Per @context/features/image-slider-fix.md, clicking a portfolio image should open the lightbox on that same image — instead a seemingly-random different image was opening, even for the very first tile (confirmed with user, ruling out any pagination-math bug).
+- Root cause: a Next.js hydration bug. `PortfolioLightbox` is a client component but gets server-rendered as part of the page's initial HTML. `shuffle()` uses `Math.random()` inside the `useState` initializer, so the server computes one random order for the SSR'd HTML and the client computes a *different* random order during hydration for the actual interactive state — the visually-painted tile and the `onClick` handler's index math end up referencing two different shuffles.
+- Fix: never randomize during the initial render. Changed to `useState(images)` (deterministic, matches server exactly) plus a `useEffect` that reshuffles once, client-side only, after mount — so server/client hydration always agrees, and the one reshuffle afterward is a normal post-hydration state update with no server/client diffing involved.
+- `VideoGallery.tsx` had the identical unsafe pattern (`useState(() => shuffle(videos))`) — fixed the same way proactively, even though it wasn't the one reported broken, since it's the same root cause and could cause a similar (if less noticeable, no click-to-open interaction there) issue.
+- Verified with user: clicking various tiles now consistently opens the exact photo clicked, including right after a fresh page load.
+- Branch: `feature/image-slider-fix` (merged and deleted — see History).
+- Status: Done. See @context/features/image-slider-fix.md for full implementation notes.
+
 ## History
 
 - 2026-09-02: Created feature branch feature/login-and-edit and added the initial owner-auth + content-edit flow.
@@ -152,3 +162,4 @@ In Progress
 - 2026-09-24: Created and merged branch `feature/live-hosting`, added `metadataBase` to `app/layout.tsx`, and walked the user through pointing `clearchoicemedia.co` (registered at GoDaddy) at Render — removing Squarespace's hosting DNS records and adding Render's. Both apex and `www` confirmed fully live with valid SSL; `NEXT_PUBLIC_APP_URL` updated in Render's environment. See @context/features/live-hosting.md for full details.
 - 2026-09-26: Created and merged branch `feature/contact-form-adjustments` — added Resend email notifications on contact form submission (to `Clifton@clearchoicemedia.co`, DB save still happens first and is authoritative) and fixed mobile responsiveness (padding compounding across nested containers, and a malformed multi-field `<label>`). Domain verified on Resend using DNS records at GoDaddy. Verified end-to-end with a real form submission. See @context/features/contact-form-adjustments.md for full details.
 - 2026-09-26: Created and merged branch `feature/mobile-optimizations` — fixed the ~400px horizontal cutoff (root `overflowX` changed to `'auto'`) and made the mobile nav menu internally scrollable with a body-scroll lock. Also bundled in (per user, mid-flow): removed the business phone and email from all public display (contact section, footer) since the client wants visitors to use the contact form exclusively; redesigned the footer's Contact column into a region line + "Get In Touch" link. See @context/mobile-optimization.md for full details.
+- 2026-09-26: Created and merged branch `feature/image-slider-fix` — fixed a Next.js hydration mismatch (`Math.random()` shuffle running differently on server vs. client) that caused the portfolio lightbox to open a seemingly-random wrong photo. Deferred shuffling to a post-mount `useEffect` in both `PortfolioLightbox.tsx` and (proactively) `VideoGallery.tsx`, which had the same unsafe pattern. Verified with user. See @context/features/image-slider-fix.md for full details.
