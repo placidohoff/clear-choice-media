@@ -93,6 +93,15 @@ In Progress
 - Branch: `feature/contact-form` (merged and deleted — see History).
 - Status: Done. See @context/features/contact-form.md for full implementation notes.
 
+## Contact Form Adjustments
+
+- Goal: Per @context/features/contact-form-adjustments.md — (1) send an email notification on submission (in addition to the existing DB save, not instead of it — the admin `/admin/inquiries` viewer still needs the DB row) to `Clifton@clearchoicemedia.co`, also to `placido.hoff@gmail.com` temporarily for verification (user said to remove that once confirmed working); (2) fix mobile responsiveness.
+- Email provider: **Resend**, confirmed with user. Requires the user to sign up, verify the `clearchoicemedia.co` sending domain (DNS records at GoDaddy, same access used for the live-hosting switch), and provide an API key.
+- Responsive root cause diagnosed: padding compounds across nested containers (section `p-8`/`p-12` → form's own `p-6`) with no smaller value at mobile breakpoints, squeezing form content into a very narrow column on phones. Also fixing a markup bug: Event Time/Event Location/Estimated Guest Count were incorrectly crammed into a single `<label>` with fake `<span>` sub-labels.
+- Verified end-to-end: real inquiry submitted through the live form, saved to the DB, and the notification email arrived. `placido.hoff@gmail.com` removed from `NOTIFICATION_RECIPIENTS` per the user's own instruction, now that it's confirmed working — only `Clifton@clearchoicemedia.co` receives notifications going forward.
+- Branch: `feature/contact-form-adjustments` (merged and deleted — see History).
+- Status: Done. See @context/features/contact-form-adjustments.md for full implementation notes.
+
 ## Button Functionalities (Fix Links)
 
 - Goal: Per @context/features/fix-links.md, every button/link on the homepage should lead somewhere or do something — scroll to the appropriate section, or show a "Coming Soon" modal if no appropriate section exists.
@@ -128,3 +137,4 @@ In Progress
 - 2026-09-17: Created and merged branch `feature/contact-form` — DB-backed contact form (new `ContactSubmission` Prisma model, first real migration history for this project), expanded fields, visual calendar + time picker, event-type dropdown, services checkboxes, success modal, and a new protected `/admin/inquiries` viewer. Also updated the site's real contact email/phone. See @context/features/contact-form.md for full details.
 - 2026-09-23: Created and merged branch `feature/fix-links` — full audit and fix of every button/link on the homepage (service cards, section CTAs, footer nav/company/contact lists). New `ComingSoonButton` component for genuinely unbuilt destinations (footer Reviews; also "Explore Video"/"View Wedding Services" with a Contact Us action per follow-up). New `SectionLink` component fixes a Next.js `Link` quirk where clicking a different button to a hash you're already on did nothing. See @context/features/fix-links.md for full details.
 - 2026-09-24: Created and merged branch `feature/live-hosting`, added `metadataBase` to `app/layout.tsx`, and walked the user through pointing `clearchoicemedia.co` (registered at GoDaddy) at Render — removing Squarespace's hosting DNS records and adding Render's. Both apex and `www` confirmed fully live with valid SSL; `NEXT_PUBLIC_APP_URL` updated in Render's environment. See @context/features/live-hosting.md for full details.
+- 2026-09-26: Created and merged branch `feature/contact-form-adjustments` — added Resend email notifications on contact form submission (to `Clifton@clearchoicemedia.co`, DB save still happens first and is authoritative) and fixed mobile responsiveness (padding compounding across nested containers, and a malformed multi-field `<label>`). Domain verified on Resend using DNS records at GoDaddy. Verified end-to-end with a real form submission. See @context/features/contact-form-adjustments.md for full details.

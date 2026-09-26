@@ -61,7 +61,7 @@ export default function ContactForm({ eventTypes }: { eventTypes: { name: string
 
   return (
     <>
-      <form ref={formRef} action={formAction} className="grid gap-4 rounded-[1.5rem] bg-[#0b1821] p-6 ring-1 ring-white/10">
+      <form ref={formRef} action={formAction} className="grid gap-4 rounded-[1.5rem] bg-[#0b1821] p-4 sm:p-6 ring-1 ring-white/10">
         <div className="grid gap-4 md:grid-cols-2">
           <label className="grid gap-2 text-sm uppercase tracking-[0.18em] text-slate-300">
             Name
@@ -129,32 +129,38 @@ export default function ContactForm({ eventTypes }: { eventTypes: { name: string
             <input type="hidden" name="eventDate" value={selectedDate ? selectedDate.toISOString() : ""} />
           </div>
 
-          <label className="grid gap-2 text-sm uppercase tracking-[0.18em] text-slate-300">
-            Event Time
-            <input
-              name="eventTime"
-              type="time"
-              required
-              className="rounded-xl border border-white/10 bg-[#0f212d] px-4 py-3 text-base text-white outline-none"
-            />
+          <div className="grid gap-4">
+            <label className="grid gap-2 text-sm uppercase tracking-[0.18em] text-slate-300">
+              Event Time
+              <input
+                name="eventTime"
+                type="time"
+                required
+                className="rounded-xl border border-white/10 bg-[#0f212d] px-4 py-3 text-base text-white outline-none"
+              />
+            </label>
 
-            <span className="mt-4">Event Location</span>
-            <input
-              name="eventLocation"
-              required
-              className="rounded-xl border border-white/10 bg-[#0f212d] px-4 py-3 text-base text-white outline-none"
-              placeholder="Venue or city"
-            />
+            <label className="grid gap-2 text-sm uppercase tracking-[0.18em] text-slate-300">
+              Event Location
+              <input
+                name="eventLocation"
+                required
+                className="rounded-xl border border-white/10 bg-[#0f212d] px-4 py-3 text-base text-white outline-none"
+                placeholder="Venue or city"
+              />
+            </label>
 
-            <span className="mt-4">Estimated Guest Count</span>
-            <input
-              name="estimatedGuestCount"
-              type="number"
-              min={1}
-              className="rounded-xl border border-white/10 bg-[#0f212d] px-4 py-3 text-base text-white outline-none"
-              placeholder="Optional"
-            />
-          </label>
+            <label className="grid gap-2 text-sm uppercase tracking-[0.18em] text-slate-300">
+              Estimated Guest Count
+              <input
+                name="estimatedGuestCount"
+                type="number"
+                min={1}
+                className="rounded-xl border border-white/10 bg-[#0f212d] px-4 py-3 text-base text-white outline-none"
+                placeholder="Optional"
+              />
+            </label>
+          </div>
         </div>
 
         <fieldset className="grid gap-2 text-sm uppercase tracking-[0.18em] text-slate-300">
