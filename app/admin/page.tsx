@@ -57,27 +57,27 @@ export default async function AdminDashboardPage() {
         </div>
 
         <div className="mt-8 rounded-[2rem] border border-white/10 bg-[#0d1a22] p-6">
-          <div className="mb-6 flex items-center justify-between gap-4">
+          <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-[#7cd3ff]">Management</p>
               <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.05em]">Edit public content</h2>
             </div>
-            <div className="flex gap-2">
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
               <Link
                 href="/admin/edit"
-                className="rounded-full bg-[#7cd3ff] px-5 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#091923]"
+                className="rounded-full bg-[#7cd3ff] px-5 py-2 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-[#091923]"
               >
                 Open editor
               </Link>
               <Link
                 href="/admin/images"
-                className="rounded-full border border-white/15 px-5 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-200"
+                className="rounded-full border border-white/15 px-5 py-2 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-slate-200"
               >
                 Image Manager
               </Link>
               <Link
                 href="/admin/inquiries"
-                className="rounded-full border border-white/15 px-5 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-200"
+                className="rounded-full border border-white/15 px-5 py-2 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-slate-200"
               >
                 Inquiries
               </Link>
@@ -95,14 +95,14 @@ export default async function AdminDashboardPage() {
         </div>
 
         <div className="mt-8 rounded-[2rem] border border-white/10 bg-[#0d1a22] p-6">
-          <div className="mb-6 flex items-center justify-between gap-4">
+          <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-[#7cd3ff]">Access</p>
               <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.05em]">Admin access</h2>
             </div>
             <Link
               href="/admin/users"
-              className="rounded-full border border-white/15 px-5 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-200"
+              className="inline-block rounded-full border border-white/15 px-5 py-2 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-slate-200"
             >
               Manage admins
             </Link>

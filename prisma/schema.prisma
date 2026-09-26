@@ -58,6 +58,7 @@ model ContactSubmission {
   servicesInterested  String[]
   estimatedGuestCount Int?
   details             String?
+  resolved            Boolean  @default(false)
   createdAt           DateTime @default(now())
 
   @@map("contact_submissions")
