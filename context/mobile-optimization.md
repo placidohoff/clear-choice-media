@@ -1,0 +1,15 @@
+# Mobile Optimizations
+## Goals
+When the screen size is around 400px, the contact form and some other content is cut off. I think enabling the x-scroll to allow the user to see what is cut off would be fine. Also, the mobile menu cannot be scrolled up and down whenever it might be needed such as when the height of the screen is too short to show all items. When trying to scroll the menu, the content behind the menu is scrolled instead of the menu. Please make the mobile menu scrollable when open.
+
+## Implementation
+
+- **Horizontal cutoff fix:** couldn't identify the exact overflowing element via static code analysis alone (no browser/device tool available in this environment to measure actual rendered widths). Went with the user's own suggested approach instead of guessing which element to shrink: changed the root wrapper's `overflowX: 'hidden'` to `'auto'` in `app/page.tsx`. Considered whether this risks exposing the site's decorative blur/glow effects (e.g. the hero's `blur-3xl` panel) as unwanted scrollable overflow — it doesn't, since CSS blur filters render visually past an element's box without counting toward the box's scrollable overflow area in modern browsers. So this change is safe: if nothing is actually wider than the viewport, `auto` behaves identically to `hidden` (no scrollbar appears); if something is, it's now reachable instead of silently clipped.
+- **Mobile menu scroll fix (`app/components/NavHeader.tsx`):**
+	- The overlay panel (`absolute inset-x-0 top-full` within the `fixed` header) had no height cap or `overflow-y` of its own, so on short screens its content just extended past the viewport with nothing to scroll it — while touch-scroll gestures fell through to the page behind it.
+	- Added `max-h-[calc(100vh-64px)] overflow-y-auto` to the panel (64px approximates the mobile header's height) so the menu itself scrolls once its content exceeds available height.
+	- Added a `useEffect` that sets `document.body.style.overflow = "hidden"` while the menu is open (restoring the previous value on close/unmount) — this is what actually stops the page behind the menu from scrolling in response to the same touch gesture.
+- **Bundled ad-hoc requests** (mid-flow, per user, not in the original goal text above):
+	- Removed the business phone number and "Call" link, and the business email and its `mailto:` link, from every *public* display location (`app/page.tsx`'s contact section info list and footer) — the client wants visitors to use the contact form exclusively. The `ContactForm`'s own Phone input (the *visitor's* number) and the backend Resend notification recipient are unrelated/unaffected — only public display was removed. Underlying `contact.phone`/`contact.email` data fields kept in the schema in case they're wanted back.
+	- Redesigned the footer's Contact column (now sparse after removing phone/email) into a literal "Rhode Island and Southern New England" line plus a "Get In Touch →" `/#contact` link, shown live on a local dev server for approval before committing.
+- Branch: `feature/mobile-optimizations`.

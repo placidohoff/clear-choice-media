@@ -25,7 +25,7 @@ export default async function Home() {
   const videos = content.videos;
 
   return (
-    <div className="min-h-screen w-full bg-[#071019] text-white" style={{overflowX: 'hidden'}}>
+    <div className="min-h-screen w-full bg-[#071019] text-white" style={{overflowX: 'auto'}}>
       <main className="bg-[#071019]">
         <HeroCarousel hero={content.hero} />
 
@@ -280,8 +280,6 @@ export default async function Home() {
                 <div className="mt-8 space-y-4 text-base text-slate-300">
                   <p>{content.contact.city}</p>
                   <p>{content.contact.serviceArea}</p>
-                  <p>{content.contact.email}</p>
-                  <p>{content.contact.phone}</p>
                 </div>
               </div>
 
@@ -331,16 +329,11 @@ export default async function Home() {
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#7cd3ff]">Contact</p>
             <ul className="mt-5 space-y-3 text-base text-slate-300">
+              <li className="text-slate-300">Rhode Island and Southern New England</li>
               <li>
-                <a href={`mailto:${content.contact.email}`} className="transition hover:text-[#7cd3ff]">
-                  {content.contact.email}
-                </a>
-              </li>
-              <li className="text-slate-300">{content.contact.city}</li>
-              <li>
-                <a href={`tel:${content.contact.phone.replace(/[^+\d]/g, "")}`} className="transition hover:text-[#7cd3ff]">
-                  Call
-                </a>
+                <SectionLink href="/#contact" className="inline-block font-bold text-[#7cd3ff] transition hover:text-white">
+                  Get In Touch →
+                </SectionLink>
               </li>
             </ul>
           </div>
