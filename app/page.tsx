@@ -263,7 +263,7 @@ export default async function Home() {
         </section>
 
         <section id="contact" className="bg-[#071019] px-6 py-12 lg:px-10 lg:py-20">
-          <div className="mx-auto max-w-[1400px] rounded-[2rem] border border-white/10 bg-[#0d1a22] p-8 lg:p-12">
+          <div className="mx-auto max-w-[1400px] rounded-[2rem] border border-white/10 bg-[#0d1a22] p-4 sm:p-8 lg:p-12">
             <div className="mb-8 flex items-center gap-4">
               <div className="h-px w-12 bg-white/40" />
               <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-slate-300">Contact</p>

@@ -1,0 +1,14 @@
+# Email Contact Form
+## Goals
+The contact form needs to send an email to Clifton@clearchoicemedia.co instead of just storing it in a db. (Send it to placido.hoff@gmail.com as well so I can verify it is working. Once verified this email can be removed) Also, the contact form currently is not responsive. It needs to have a mobile friendly look.
+
+## Implementation
+
+- **Interpretation:** "instead of just storing it in a db" was read as "in addition to" — the DB write stays (it's what `/admin/inquiries` reads), email notification is a new addition, not a replacement.
+- **Email provider: Resend** (confirmed with user). New `app/actions/contact.ts` function `sendNotificationEmail` sends via the `resend` SDK, from `Clear Choice Media <noreply@clearchoicemedia.co>` to `NOTIFICATION_RECIPIENTS` (now just `Clifton@clearchoicemedia.co` — `placido.hoff@gmail.com` was included temporarily for verification and removed once the user confirmed a real submission's email arrived, per their own original instruction).
+- **Failure isolation:** the DB write happens first and is the one thing that can fail the whole submission (returns an error to the visitor). Email sending is wrapped in its own try/catch *after* the DB write succeeds — if Resend errors or the API key isn't configured yet, the visitor still gets a successful submission (the DB row is the source of truth; email is a best-effort side notification). `sendNotificationEmail` also short-circuits silently if `RESEND_API_KEY` isn't set, so nothing breaks before the user finishes setting up Resend.
+- Domain verified on Resend: added a DKIM `TXT` record (`resend._domainkey`) and two `CNAME` records (`rsend`, `send` → `*.forge.rmta.net`) at GoDaddy. Resend needed a manual "Verify DNS Records" click to re-check rather than picking up the already-propagated records automatically.
+- `RESEND_API_KEY` added to local `.env` (documented in `.env.example`); **outstanding for user:** add the same key to Render's environment variables so it works in production too.
+- Verified end-to-end with a real submission through the live form — saved to the DB and the notification email arrived.
+- **Responsive fix:** root cause was padding compounding across nested containers (the contact section's card `p-8`/`p-12` plus the form's own `p-6`, neither with a smaller value at mobile breakpoints) squeezing all form content into a very narrow column on phones. Changed to `p-4 sm:p-8 lg:p-12` (card, in `app/page.tsx`) and `p-4 sm:p-6` (form, in `ContactForm.tsx`). Also fixed a markup bug where Event Time, Event Location, and Estimated Guest Count were incorrectly crammed into a single `<label>` with fake `<span>` sub-labels — split into 3 proper `<label>`s, each wrapping exactly one input.
+- Branch: `feature/contact-form-adjustments`.
