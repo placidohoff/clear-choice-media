@@ -44,6 +44,6 @@ Note: this implementation signs only `timestamp` for simplicity. For stricter co
 - Validate the admin session server-side before issuing signatures (already implemented via `requireAdminSession()` on the admin page).
 
 ## Where to store image references
-- Store `secure_url` and `public_id` in your `data/site-content.json` or a future database model (recommended: Prisma `Image` model with `url`, `alt`, `public_id`, `category`, `createdAt`).
+- Store `secure_url` and `public_id` via the `SiteContent` Prisma model (site content is now DB-backed, not a JSON file — see @context/features/persistent-changes.md), or the existing `MediaAsset` model (`url`, `altText`, `category`, `isFeatured`) for a dedicated media library.
 
 If you want, I can implement server-side uploads (Cloudinary SDK) or tighten the signature to include `folder` and other params.
