@@ -152,6 +152,14 @@ In Progress
 - Branch: `feature/admin-section-adjustments` (merged and deleted — see History).
 - Status: Done. See @context/features/admin-section-adjustments.md for full implementation notes.
 
+## Persistent Admin Changes
+
+- Goal: Per @context/features/persistent-changes.md, admin content edits ("Edit Public Content") don't persist in production.
+- Root cause: `readSiteContent`/`writeSiteContent` (`lib/site-content.ts`) do plain local filesystem I/O against `data/site-content.json`. Render's filesystem is ephemeral — it resets to whatever's baked into the git repo on every redeploy, so admin edits work in the moment but vanish on the next deploy.
+- Fix: there's already an unused `SiteContent` Prisma model (`key`/`value: Json`) in the schema — this was the original plan (per the feature's own earlier notes: "migrating... toward a Prisma model") but never got wired up. Swapped the storage layer to use it (one row, key `"homepage"`, value = the whole content blob), keeping the exact same shape/schema/consuming code — only the persistence mechanism changed.
+- Seeded the DB row from the *current* `data/site-content.json`, not the (now-stale) `defaultSiteContent` fallback — discovered the JSON file already has real edits (services images pointing to actual Cloudinary photos) that never made it into `defaultSiteContent`, confirming the bug was already actively at risk of losing real content on the next deploy.
+- Branch: `feature/persistent-changes`.
+
 ## History
 
 - 2026-09-02: Created feature branch feature/login-and-edit and added the initial owner-auth + content-edit flow.

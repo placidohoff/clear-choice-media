@@ -1,6 +1,6 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
 import { z } from "zod";
+
+import { prisma } from "@/lib/prisma";
 
 export const siteContentSchema = z.object({
   hero: z.object({
@@ -170,25 +170,18 @@ export const defaultSiteContent: SiteContent = {
   },
 };
 
-const dataFilePath = path.join(process.cwd(), "data", "site-content.json");
-
-async function ensureDataFile() {
-  await mkdir(path.dirname(dataFilePath), { recursive: true });
-
-  try {
-    await readFile(dataFilePath, "utf8");
-  } catch {
-    await writeFile(dataFilePath, JSON.stringify(defaultSiteContent, null, 2), "utf8");
-  }
-}
+const SITE_CONTENT_KEY = "homepage";
 
 export async function readSiteContent(): Promise<SiteContent> {
-  await ensureDataFile();
+  const row = await prisma.siteContent.findUnique({
+    where: { key: SITE_CONTENT_KEY },
+  });
 
-  const raw = await readFile(dataFilePath, "utf8");
-  const parsed = JSON.parse(raw) as unknown;
+  if (!row) {
+    return defaultSiteContent;
+  }
 
-  const result = siteContentSchema.safeParse(parsed);
+  const result = siteContentSchema.safeParse(row.value);
 
   if (!result.success) {
     return defaultSiteContent;
@@ -198,6 +191,9 @@ export async function readSiteContent(): Promise<SiteContent> {
 }
 
 export async function writeSiteContent(content: SiteContent) {
-  await ensureDataFile();
-  await writeFile(dataFilePath, JSON.stringify(content, null, 2), "utf8");
+  await prisma.siteContent.upsert({
+    where: { key: SITE_CONTENT_KEY },
+    create: { key: SITE_CONTENT_KEY, value: content },
+    update: { value: content },
+  });
 }
