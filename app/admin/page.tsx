@@ -34,7 +34,7 @@ export default async function AdminDashboardPage() {
           </div>
         </header>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        {/* <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           <div className="rounded-[1.5rem] border border-white/10 bg-[#0d1a22] p-5">
             <p className="text-xs uppercase tracking-[0.25em] text-slate-400">Hero Title</p>
             <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.05em]">{content.hero.title}</h2>
@@ -54,7 +54,7 @@ export default async function AdminDashboardPage() {
             <p className="text-xs uppercase tracking-[0.25em] text-slate-400">Main Services</p>
             <h2 className="mt-3 text-xl font-semibold text-slate-100">{content.services.length} sections</h2>
           </div>
-        </div>
+        </div> */}
 
         <div className="mt-8 rounded-[2rem] border border-white/10 bg-[#0d1a22] p-6">
           <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -79,7 +79,7 @@ export default async function AdminDashboardPage() {
                 href="/admin/inquiries"
                 className="rounded-full border border-white/15 px-5 py-2 text-center text-[10px] font-bold uppercase tracking-[0.2em] text-slate-200"
               >
-                Inquiries
+                View Requests
               </Link>
             </div>
           </div>

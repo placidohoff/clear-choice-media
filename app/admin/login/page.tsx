@@ -30,10 +30,10 @@ export default function AdminLoginPage() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-[#071019] px-4 py-12 text-white">
       <div className="w-full max-w-md rounded-[2rem] border border-white/10 bg-[#0d1a22] p-8 shadow-[0_30px_80px_rgba(0,0,0,0.4)]">
-        <div className="mb-8">
+        {/* <div className="mb-8">
           <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-[#7cd3ff]">Owner access</p>
           <h1 className="mt-4 text-4xl font-black uppercase tracking-[-0.06em]">Admin Login</h1>
-        </div>
+        </div> */}
 
         <form action={formAction} className="space-y-5">
           <label className="block">
@@ -71,7 +71,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={isPending}
-            className="w-full rounded-full bg-[#7cd3ff] px-6 py-3 text-[11px] font-bold uppercase tracking-[0.2em] text-[#091923] transition hover:bg-[#8ad8ff] disabled:cursor-not-allowed disabled:opacity-70"
+            className="w-[90%] rounded-full bg-[#7cd3ff] px-6 py-3 text-[11px] font-bold uppercase tracking-[0.2em] text-[#091923] transition hover:bg-[#8ad8ff] disabled:cursor-not-allowed disabled:opacity-70 flex justify-center items-center gap-2 mx-auto"
           >
             {isPending ? "Signing In..." : "Sign In"}
           </button>

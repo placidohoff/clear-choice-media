@@ -1,4 +1,5 @@
 import { createAdminUser, listAdminUsers, requireAdminSession } from "@/app/actions/admin";
+import RemoveAdminButton from "./RemoveAdminButton";
 
 export default async function AdminUsersPage({
   searchParams,
@@ -57,14 +58,19 @@ export default async function AdminUsersPage({
                 <p className="text-slate-400">No admin users created yet.</p>
               ) : (
                 users.map((user) => (
-                  <div key={user.id} className="flex items-center justify-between rounded-2xl border border-white/10 bg-[#071019] p-4">
+                  <div key={user.id} className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-[#071019] p-4">
                     <div>
                       <p className="font-semibold text-slate-100">{user.name || user.email}</p>
                       <p className="text-sm text-slate-400">{user.email}</p>
                     </div>
-                    <span className="rounded-full border border-[#7cd3ff]/30 bg-[#7cd3ff]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#7cd3ff]">
-                      {user.role}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="rounded-full border border-[#7cd3ff]/30 bg-[#7cd3ff]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#7cd3ff]">
+                        {user.role}
+                      </span>
+                      {user.email !== session.email && (
+                        <RemoveAdminButton userId={user.id} email={user.email} />
+                      )}
+                    </div>
                   </div>
                 ))
               )}
