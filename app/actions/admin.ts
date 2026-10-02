@@ -174,3 +174,46 @@ export async function createAdminUser(formData: FormData): Promise<void> {
   revalidatePath("/admin");
   redirect("/admin/users?success=" + encodeURIComponent(`Created ${email} as ${role}.`));
 }
+
+export async function removeAdminUser(formData: FormData): Promise<void> {
+  const session = await requireAdminSession();
+
+  if (session.role !== "OWNER") {
+    redirect("/admin/users?error=" + encodeURIComponent("Only the owner can remove admin accounts."));
+  }
+
+  const targetId = String(formData.get("userId") ?? "");
+  const password = String(formData.get("password") ?? "");
+
+  if (!targetId || !password) {
+    redirect("/admin/users?error=" + encodeURIComponent("Enter your password to confirm removal."));
+  }
+
+  const actingUser = await prisma.user.findUnique({ where: { email: session.email } });
+
+  if (!actingUser || !(await bcrypt.compare(password, actingUser.password))) {
+    redirect("/admin/users?error=" + encodeURIComponent("Incorrect password. Admin not removed."));
+  }
+
+  if (targetId === actingUser.id) {
+    redirect("/admin/users?error=" + encodeURIComponent("You can't remove your own account."));
+  }
+
+  const target = await prisma.user.findUnique({ where: { id: targetId } });
+
+  if (!target) {
+    redirect("/admin/users?error=" + encodeURIComponent("That admin no longer exists."));
+  }
+
+  if (target.role === "OWNER") {
+    const ownerCount = await prisma.user.count({ where: { role: "OWNER" } });
+    if (ownerCount <= 1) {
+      redirect("/admin/users?error=" + encodeURIComponent("Can't remove the last remaining owner."));
+    }
+  }
+
+  await prisma.user.delete({ where: { id: targetId } });
+
+  revalidatePath("/admin/users");
+  redirect("/admin/users?success=" + encodeURIComponent(`Removed ${target.email}.`));
+}

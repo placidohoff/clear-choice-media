@@ -22,7 +22,7 @@ export default function UploadClient() {
   async function handleUpload() {
     setError(null);
     if (!file) {
-      setError("Please select an image file first.");
+      setError("Please choose a photo first.");
       return;
     }
 
@@ -32,7 +32,7 @@ export default function UploadClient() {
       const sigRes = await fetch("/api/cloudinary-sign");
       const sig = await sigRes.json();
       if (!sig.ok) {
-        setError(sig.message || "Cloudinary signing not configured");
+        setError(sig.message || "Photo uploads aren't set up yet. Please contact your developer.");
         setUploading(false);
         return;
       }
@@ -49,7 +49,7 @@ export default function UploadClient() {
       const res = await fetch(uploadUrl, { method: "POST", body: fd });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error?.message || "Upload failed");
+        setError(data.error?.message || "Something went wrong uploading the photo. Please try again.");
         setUploading(false);
         return;
       }
@@ -64,34 +64,42 @@ export default function UploadClient() {
 
   return (
     <div className="mx-auto max-w-3xl p-6">
-          <h1 className="text-2xl font-bold mb-4">Images Manager</h1>
-          <p className="mb-4">Upload images to Cloudinary using signed uploads. Ensure Cloudinary env vars are set.</p>
+      <h1 className="text-2xl font-bold">Image Manager</h1>
+      <p className="mt-2 text-slate-300">Upload a photo to use on the website.</p>
 
-      <input type="file" accept="image/*" onChange={handleFile} />
-
-      {preview && (
-        <div className="mt-4">
-          <img src={preview} alt="preview" className="max-h-60 rounded" />
+      <div className="mt-18 flex flex-col gap-6">
+        <div className="flex flex-wrap items-center gap-3">
+          <label className="inline-flex cursor-pointer items-center gap-3 rounded-full border border-[#7cd3ff]/40 bg-[#7cd3ff]/10 px-5 py-3 text-sm font-bold text-[#7cd3ff] transition hover:border-[#7cd3ff]/70 hover:bg-[#7cd3ff]/20">
+            Choose Photo
+            <input type="file" accept="image/*" onChange={handleFile} className="hidden" />
+          </label>
+          {file && <span className="text-sm text-slate-300">{file.name}</span>}
         </div>
-      )}
 
-      <div className="mt-4">
-        <button
-          onClick={handleUpload}
-          disabled={uploading}
-          className="rounded bg-[#7cd3ff] px-4 py-2 text-[#091923] font-bold"
-        >
-          {uploading ? "Uploading..." : "Upload"}
-        </button>
+        {preview && (
+          <div>
+            <img src={preview} alt="preview" className="max-h-60 rounded" />
+          </div>
+        )}
+
+        <div>
+          <button
+            onClick={handleUpload}
+            disabled={uploading}
+            className="rounded-full bg-[#7cd3ff] px-5 py-3 text-sm font-bold text-[#091923] transition hover:bg-[#8ad8ff] disabled:cursor-not-allowed disabled:opacity-70"
+          >
+            {uploading ? "Uploading..." : "Upload"}
+          </button>
+        </div>
+
+        {uploadedUrl && (
+          <div>
+            Photo uploaded! <a href={uploadedUrl} target="_blank" rel="noreferrer" className="text-blue-300">View it here</a>
+          </div>
+        )}
+
+        {error && <div className="text-red-400">{error}</div>}
       </div>
-
-      {uploadedUrl && (
-        <div className="mt-4">
-          Uploaded: <a href={uploadedUrl} target="_blank" rel="noreferrer" className="text-blue-300">{uploadedUrl}</a>
-        </div>
-      )}
-
-      {error && <div className="mt-4 text-red-400">{error}</div>}
     </div>
   );
 }

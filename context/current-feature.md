@@ -160,6 +160,16 @@ In Progress
 - Seeded the DB row from the *current* `data/site-content.json`, not the (now-stale) `defaultSiteContent` fallback — discovered the JSON file already has real edits (services images pointing to actual Cloudinary photos) that never made it into `defaultSiteContent`, confirming the bug was already actively at risk of losing real content on the next deploy.
 - Branch: `feature/persistent-changes`.
 
+## Admin Ad-hoc Changes
+
+- Goal: ad-hoc polish/feature requests to the admin section, no dedicated spec file — tracked here as they came in.
+- Simplified `/admin/images` (`UploadClient.tsx`) copy to be non-technical: no more mentions of Cloudinary/signing/env vars anywhere visible to the admin. Title "Images Manager" → "Image Manager" (matches the dashboard nav label); error messages reworded in plain language.
+- Styled the native file input (which rendered as an unstyled, non-obviously-clickable browser default) as a custom button-style `<label>` matching the site's existing pill-button look, with the selected filename shown next to it. Cleaned up the page's vertical spacing into a consistent `flex flex-col gap-6` rhythm.
+- Added admin removal to `/admin/users`: confirmed with user that removal is confirmed via the *acting owner's own* password (not the target admin's), matching the standard "confirm it's really you" pattern — doesn't require knowing a departing/uncooperative admin's password to revoke their access. New `removeAdminUser` action (`app/actions/admin.ts`) with guards: OWNER-only, can't remove yourself, can't remove the last remaining OWNER. New `RemoveAdminButton` client component (password-confirmation modal) per admin row, hidden for your own row.
+- Verified the removal logic directly against the live DB (wrong-password rejection, correct-password acceptance, actual delete, cleanup) — all passed.
+- Branch: `feature/admin-adhoc-changes` (merged — branch kept around in case more ad-hoc admin tweaks come up; delete separately if not needed).
+- Status: Done.
+
 ## History
 
 - 2026-09-02: Created feature branch feature/login-and-edit and added the initial owner-auth + content-edit flow.
