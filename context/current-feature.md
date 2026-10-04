@@ -185,6 +185,13 @@ In Progress
 - Fix: added `export const revalidate = 0;` to `app/page.tsx`, forcing the homepage to be fully dynamic (`ƒ Dynamic` in build output, confirmed) — it now re-reads the database on every single request instead of relying on any static/ISR cache that could drift out of sync across deploys. Since content edits are infrequent (admin-driven, not high-traffic writes) the extra per-request DB round-trip is an acceptable tradeoff for guaranteed freshness, and closes this entire class of bug permanently rather than just fixing this one instance.
 - Branch: `fix/homepage-stale-cache`.
 
+## Wedding Section Image Update
+
+- Goal: ad-hoc correction — change the Wedding section's photo from `pic-15` to `pic-29` (Cloudinary).
+- Verified `pic-29` resolves before swapping. Confirmed locally on the dev server.
+- Branch: `fix/wedding-section-image-2`.
+- Status: Done.
+
 ## History
 
 - 2026-09-02: Created feature branch feature/login-and-edit and added the initial owner-auth + content-edit flow.
