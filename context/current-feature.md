@@ -170,6 +170,14 @@ In Progress
 - Branch: `feature/admin-adhoc-changes` (merged — branch kept around in case more ad-hoc admin tweaks come up; delete separately if not needed).
 - Status: Done.
 
+## Contact Email Recipient Update
+
+- Goal: ad-hoc change — contact form notification emails should go to `clearchoicemedia1@gmail.com` instead of `Clifton@clearchoicemedia.co`.
+- Updated `NOTIFICATION_RECIPIENTS` in `app/actions/contact.ts`. Doesn't touch the separate `contact.email` field in site content (the business's own displayed/stored email, unrelated to where form notifications are sent).
+- Verified with a real test send via Resend; user confirmed it arrived.
+- Branch: `fix/contact-email-recipient`.
+- Status: Done.
+
 ## History
 
 - 2026-09-02: Created feature branch feature/login-and-edit and added the initial owner-auth + content-edit flow.

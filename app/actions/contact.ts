@@ -9,7 +9,7 @@ export type SubmitContactFormResult =
   | { success: true }
   | { success: false; error: string };
 
-const NOTIFICATION_RECIPIENTS = ["Clifton@clearchoicemedia.co"];
+const NOTIFICATION_RECIPIENTS = ["clearchoicemedia1@gmail.com"];
 
 async function sendNotificationEmail(submission: ContactSubmissionInput) {
   const apiKey = process.env.RESEND_API_KEY;
