@@ -178,6 +178,13 @@ In Progress
 - Branch: `fix/contact-email-recipient`.
 - Status: Done.
 
+## Homepage Stale Cache Fix
+
+- Goal: user reported the old Unsplash stock photo was still visible in the live hero carousel even though the database (verified directly) only had the 3 real Cloudinary slides — a genuine mismatch between what's served and what's stored.
+- Root cause: the homepage was statically generated (`○ Static` in build output) and relied entirely on `revalidatePath("/")` (called by `updateSiteContent`) to stay fresh. That worked for edits made through the admin UI, but the underlying Next.js full-route cache evidently didn't get reliably regenerated across some subsequent redeploys — the live site kept serving a frozen snapshot from before the stock slide was removed from the DB, despite multiple successful builds/deploys in between. Verified by directly inspecting the live HTML (found the stock image rendered with the exact `opacity:0.4` inline-style pattern from `HeroCarousel`'s background panel, alongside the 3 correct Cloudinary slides — not a cache-duplication artifact, a genuinely stale 4-slide render) against a freshly-queried DB that only had 3.
+- Fix: added `export const revalidate = 0;` to `app/page.tsx`, forcing the homepage to be fully dynamic (`ƒ Dynamic` in build output, confirmed) — it now re-reads the database on every single request instead of relying on any static/ISR cache that could drift out of sync across deploys. Since content edits are infrequent (admin-driven, not high-traffic writes) the extra per-request DB round-trip is an acceptable tradeoff for guaranteed freshness, and closes this entire class of bug permanently rather than just fixing this one instance.
+- Branch: `fix/homepage-stale-cache`.
+
 ## History
 
 - 2026-09-02: Created feature branch feature/login-and-edit and added the initial owner-auth + content-edit flow.

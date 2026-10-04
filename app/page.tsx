@@ -15,6 +15,11 @@ const SERVICE_LINKS: Record<string, string> = {
   "Event Video": "/#video",
 };
 
+// Content is admin-editable and DB-backed; always render fresh so edits
+// show up immediately and reliably, regardless of static-cache behavior
+// across deploys (revalidatePath alone proved unreliable for this).
+export const revalidate = 0;
+
 export default async function Home() {
   const content = await readSiteContent();
   const navItems = content.nav;
