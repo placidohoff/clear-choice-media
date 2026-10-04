@@ -66,12 +66,6 @@ export const defaultSiteContent: SiteContent = {
     secondaryCta: "View Our Work",
     slides: [
       {
-        image:
-          "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=80",
-        eventName: "RI Summer Social",
-        eventMeta: "Photography • Video • Booth Experience",
-      },
-      {
         image: "https://res.cloudinary.com/rpwj7zbv/image/upload/v1789154860/pic-6.png",
         eventName: "Photography",
         eventMeta: "Photography • Video • Booth Experience",

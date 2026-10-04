@@ -253,7 +253,7 @@ export default async function Home() {
 
               <div className="overflow-hidden rounded-[1.8rem] bg-[#101f2a]">
                 <img
-                  src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=80"
+                  src="https://res.cloudinary.com/rpwj7zbv/image/upload/pic-15.png"
                   alt="Wedding moment"
                   className="h-[440px] w-full object-cover"
                 />
