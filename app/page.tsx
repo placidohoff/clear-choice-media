@@ -15,6 +15,30 @@ const SERVICE_LINKS: Record<string, string> = {
   "Event Video": "/#video",
 };
 
+// Picks the largest column count (up to max) that divides the item count evenly,
+// so every row has the same number of tiles instead of a lone leftover on the last row.
+function pickColumns(count: number, max: number): number {
+  for (let columns = max; columns > 1; columns--) {
+    if (count % columns === 0) return columns;
+  }
+  return 1;
+}
+
+function getEventTileWidthClasses(count: number): string {
+  const mdColumns = pickColumns(count, 2);
+  const xlColumns = pickColumns(count, 3);
+
+  const mdClass = mdColumns === 1 ? "md:w-full" : "md:w-[calc(50%-0.5rem)]";
+  const xlClass =
+    xlColumns === 1
+      ? "xl:w-full"
+      : xlColumns === 2
+        ? "xl:w-[calc(50%-0.5rem)]"
+        : "xl:w-[calc(33.333%-0.667rem)]";
+
+  return `${mdClass} ${xlClass}`;
+}
+
 // Content is admin-editable and DB-backed; always render fresh so edits
 // show up immediately and reliably, regardless of static-cache behavior
 // across deploys (revalidatePath alone proved unreliable for this).
@@ -48,11 +72,11 @@ export default async function Home() {
 
           <p className="mb-12 text-2xl text-slate-200">One event. Multiple ways to experience it.</p>
 
-          <div className="grid gap-8 lg:grid-cols-3">
+          <div className="flex flex-wrap justify-center gap-8">
             {serviceCards.map((service) => (
               <article
                 key={service.title}
-                className="group overflow-hidden rounded-[1.8rem] bg-[#0b1821] ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(15,23,42,0.32)]"
+                className="group w-full overflow-hidden rounded-[1.8rem] bg-[#0b1821] ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(15,23,42,0.32)] lg:w-[calc(33.333%-1.334rem)]"
               >
                 <div className="h-[420px] overflow-hidden">
                   <img
@@ -91,11 +115,11 @@ export default async function Home() {
               A photo booth is entertainment and engagement — not just a rental.
             </p>
 
-            <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-12 flex flex-wrap justify-center gap-6">
               {boothCards.map((card) => (
                 <article
                   key={card.title}
-                  className="group overflow-hidden rounded-[1.8rem] bg-[#0d1a22] ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(15,23,42,0.28)]"
+                  className="group w-full overflow-hidden rounded-[1.8rem] bg-[#0d1a22] ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(15,23,42,0.28)] md:w-[calc(50%-0.75rem)] xl:w-[calc(25%-1.125rem)]"
                 >
                   <div className="h-[280px] overflow-hidden">
                     <img
@@ -137,11 +161,11 @@ export default async function Home() {
               </p>
             </div>
 
-            <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-12 flex flex-wrap justify-center gap-4">
               {eventTypes.map((event, index) => (
                 <div
                   key={event.name}
-                  className={`flex items-center gap-5 rounded-[1.5rem] border border-white/10 bg-[#0c1720] p-6 ${
+                  className={`flex w-full items-center gap-5 rounded-[1.5rem] border border-white/10 bg-[#0c1720] p-6 ${getEventTileWidthClasses(eventTypes.length)} ${
                     index % 2 === 0 ? "bg-[#0c1720]" : "bg-[#0e1c27]"
                   }`}
                 >

@@ -192,6 +192,13 @@ In Progress
 - Branch: `fix/wedding-section-image-2`.
 - Status: Done.
 
+## Center Images
+
+- Goal: Per @context/features/center-images.md, grid sections (service cards, booth cards, "Events We Cover" tiles) should stay centered regardless of how many items are shown — the admin has already removed some items via the editor, leaving an incomplete, left-aligned last row.
+- Confirmed via live DB: `boothCards` is now 3 items in what was a 4-column grid, and `eventTypes` is now 4 items (one renamed to "Brand Events") in a 3-column grid — both currently show a visible gap instead of centering.
+- Fix: CSS Grid doesn't naturally center an incomplete last row. Converting `services`, `boothCards`, and `eventTypes` from `grid` with fixed column counts to `flex flex-wrap justify-center` with each card given a gap-compensated responsive width (`calc(N% - gap-adjustment)`) — this centers correctly for any item count, not just the current one, satisfying "despite how many items are shown." The portfolio section's bento-style grid is intentionally non-uniform (varying tile sizes) and wasn't part of what was asked, so left alone.
+- Branch: `feature/center-images`.
+
 ## History
 
 - 2026-09-02: Created feature branch feature/login-and-edit and added the initial owner-auth + content-edit flow.
