@@ -52,6 +52,7 @@ export default async function Home() {
   const eventTypes = content.eventTypes;
   const portfolioImages = content.portfolioImages;
   const videos = content.videos;
+  const serviceOptions = content.serviceOptions;
 
   return (
     <div className="min-h-screen w-full bg-[#071019] text-white" style={{overflowX: 'auto'}}>
@@ -312,7 +313,7 @@ export default async function Home() {
                 </div>
               </div>
 
-              <ContactForm eventTypes={eventTypes} />
+              <ContactForm eventTypes={eventTypes} serviceOptions={serviceOptions} />
             </div>
           </div>
         </section>

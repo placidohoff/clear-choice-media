@@ -199,6 +199,13 @@ In Progress
 - Fix: CSS Grid doesn't naturally center an incomplete last row. Converting `services`, `boothCards`, and `eventTypes` from `grid` with fixed column counts to `flex flex-wrap justify-center` with each card given a gap-compensated responsive width (`calc(N% - gap-adjustment)`) — this centers correctly for any item count, not just the current one, satisfying "despite how many items are shown." The portfolio section's bento-style grid is intentionally non-uniform (varying tile sizes) and wasn't part of what was asked, so left alone.
 - Branch: `feature/center-images`.
 
+## Add/Remove Contact Form Services
+
+- Goal: Per @context/features/add-remove-services.md, the admin should be able to add or remove options for "Services Interested In" on the Contact Form — it's currently a hardcoded `SERVICE_OPTIONS` constant in `lib/contact.ts`, not editable anywhere.
+- Decisions (confirmed with user): move `SERVICE_OPTIONS` into the DB-backed site content as a new `serviceOptions: string[]` field, edited via the existing raw JSON editor at `/admin/edit` — same pattern as `services`/`boothCards`/`eventTypes`, no new dedicated UI control.
+- `ContactForm` receives `serviceOptions` as a prop (from `app/page.tsx`, read off site content) instead of importing the hardcoded constant. `contactSubmissionSchema`'s `servicesInterested` field relaxes from a compile-time `z.enum(SERVICE_OPTIONS)` to `z.array(z.string().min(1))`, since valid options are now admin-configurable and can't be known at compile time — matches how `eventType` is already validated as a plain string.
+- Branch: `feature/add-remove-services`.
+
 ## History
 
 - 2026-09-02: Created feature branch feature/login-and-edit and added the initial owner-auth + content-edit flow.
