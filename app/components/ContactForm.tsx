@@ -4,7 +4,6 @@ import { useActionState, useRef, useState } from "react";
 import { DayPicker } from "react-day-picker";
 
 import { submitContactForm } from "@/app/actions/contact";
-import { SERVICE_OPTIONS } from "@/lib/contact";
 
 type FormState = {
   success: boolean;
@@ -38,7 +37,13 @@ const dayPickerClassNames = {
   disabled: "opacity-20",
 };
 
-export default function ContactForm({ eventTypes }: { eventTypes: { name: string }[] }) {
+export default function ContactForm({
+  eventTypes,
+  serviceOptions,
+}: {
+  eventTypes: { name: string }[];
+  serviceOptions: string[];
+}) {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [showSuccess, setShowSuccess] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
@@ -163,10 +168,10 @@ export default function ContactForm({ eventTypes }: { eventTypes: { name: string
           </div>
         </div>
 
-        <fieldset className="grid gap-2 text-sm uppercase tracking-[0.18em] text-slate-300">
+        <fieldset className="grid gap-2 text-sm uppercase tracking-[0.18em] text-slate-300 my-5">
           <legend className="mb-1">Services Interested In</legend>
           <div className="grid gap-2 sm:grid-cols-2">
-            {SERVICE_OPTIONS.map((service) => (
+            {serviceOptions.map((service) => (
               <label key={service} className="flex items-center gap-2 text-xs font-normal uppercase tracking-[0.1em] text-slate-300">
                 <input type="checkbox" name="servicesInterested" value={service} className="h-4 w-4 accent-[#7cd3ff]" />
                 {service}

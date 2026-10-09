@@ -45,6 +45,16 @@ export const siteContentSchema = z.object({
   ),
   portfolioImages: z.array(z.string()),
   videos: z.array(z.string()).min(1),
+  serviceOptions: z
+    .array(z.string())
+    .min(1)
+    .default([
+      "Event Photography",
+      "Event Video",
+      "Photo Booth Experience",
+      "360 Photo Booth",
+      "Corporate / Brand Activation",
+    ]),
   contact: z.object({
     city: z.string(),
     serviceArea: z.string(),
@@ -156,6 +166,13 @@ export const defaultSiteContent: SiteContent = {
     { length: 9 },
     (_, i) => `https://res.cloudinary.com/rpwj7zbv/video/upload/vid-${i + 1}.mp4`,
   ),
+  serviceOptions: [
+    "Event Photography",
+    "Event Video",
+    "Photo Booth Experience",
+    "360 Photo Booth",
+    "Corporate / Brand Activation",
+  ],
   contact: {
     city: "Providence, Rhode Island",
     serviceArea: "Serving Rhode Island & Southern New England",
