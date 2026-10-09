@@ -22,7 +22,7 @@ export default function UploadedImagesList({ images }: { images: UploadedImage[]
     <div className="mx-auto max-w-5xl p-6">
       <h2 className="text-xl font-bold">Uploaded Images ({images.length})</h2>
       <p className="mt-2 text-slate-300">
-        Every image currently in Cloudinary. Copy a link to use it anywhere on the site.
+        Every photo you&apos;ve uploaded. Copy a link to use it anywhere on the site.
       </p>
 
       {images.length === 0 ? (
