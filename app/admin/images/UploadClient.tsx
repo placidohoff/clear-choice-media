@@ -37,7 +37,7 @@ export default function UploadClient() {
         return;
       }
 
-      const { cloudName, apiKey, timestamp, signature } = sig;
+      const { cloudName, apiKey, timestamp, signature, folder } = sig;
       const uploadUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
 
       const fd = new FormData();
@@ -45,6 +45,7 @@ export default function UploadClient() {
       fd.append("api_key", apiKey);
       fd.append("timestamp", String(timestamp));
       fd.append("signature", signature);
+      fd.append("folder", folder);
 
       const res = await fetch(uploadUrl, { method: "POST", body: fd });
       const data = await res.json();
